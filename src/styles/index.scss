@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "Suisse";
+  src: url("../fonts/Suisse\ Intl/SuisseIntl-Regular.otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Suisse";
+  src: url("../fonts/Suisse\ Intl/SuisseIntl-Medium.otf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Suisse";
+  src: url("../fonts/Suisse\ Intl/SuisseIntl-SemiBold.otf");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Suisse";
+  src: url("../fonts/Suisse\ Intl/SuisseIntl-Book.otf");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Suisse";
+  src: url("../fonts/Suisse\ Intl/SuisseIntl-Bold.otf");
+  font-weight: 800;
+}
+@font-face {
+  font-family: "Suisse";
+  src: url("../fonts/Suisse\ Intl/SuisseIntl-Black.otf");
+  font-weight: 900;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+  top: 0;
+  left: 0.5rem;
+  z-index: 2;
+  background-color: white;
+  font-size: 0.75rem;
+  color: #535283;
+  padding: 2px 4px;
+}
