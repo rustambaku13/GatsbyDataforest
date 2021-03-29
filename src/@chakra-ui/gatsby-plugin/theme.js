@@ -8,9 +8,15 @@ import global from "./global";
 import FormLabel from "./Label";
 import Heading from "./Heading";
 import Checkbox from "./Checkbox";
+import shadows from "./BoxShadow";
+import Text from "./Text";
+import Tabs from "./Tabs";
+import space from "./space";
 const theme = {
   colors,
   fontSizes,
+  shadows,
+  space,
   sizes,
   styles: {
     global,
@@ -25,7 +31,9 @@ const theme = {
     Button,
     Input,
     Checkbox,
+    Text,
     FormLabel,
+    Tabs,
     Heading,
   },
 };

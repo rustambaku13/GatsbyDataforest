@@ -78,7 +78,7 @@ const IndexPage = () => {
               </FormControl>
 
               <Flex w="100%">
-                <Checkbox mt="2px" mr={3} d="inline-block"></Checkbox>
+                <Checkbox mb="1px" size="md" mr={2}></Checkbox>
                 <Text
                   d="inline-block"
                   color="romanSilver.base"
@@ -99,7 +99,7 @@ const IndexPage = () => {
                 size="lg"
                 w="100%"
                 fontWeight="500"
-                variant="primaryBlueBerryBlueBase"
+                variant="primaryBlueBerryBlueDark"
               >
                 Sign in to Dataforest
               </Button>

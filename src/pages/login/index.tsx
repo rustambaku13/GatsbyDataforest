@@ -70,7 +70,7 @@ const IndexPage = () => {
                   fontWeight="500"
                   size="lg"
                   w="100%"
-                  variant="primaryBlueBerryBlueBase"
+                  variant="primaryBlueBerryBlueDark"
                 >
                   Sign in to Dataforest
                 </Button>
@@ -79,7 +79,7 @@ const IndexPage = () => {
                   type="submit"
                   size="lg"
                   w="100%"
-                  variant="outline_md"
+                  variant="outline"
                 >
                   Sign in with Google
                 </Button>

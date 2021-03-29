@@ -1,6 +1,16 @@
-import { Box, Button, Flex, HStack, Image, Link } from "@chakra-ui/react";
+import {
+  AspectRatio,
+  Box,
+  Button,
+  Flex,
+  HStack,
+  IconButton,
+  Image,
+  Link,
+} from "@chakra-ui/react";
 import { Link as GLink } from "gatsby";
 import React from "react";
+import { SearchIcon } from "../../icons/jsx/search";
 import dataforest from "../../images/LogoText.svg";
 export const NavbarDefault = () => {
   return (
@@ -16,20 +26,32 @@ export const NavbarDefault = () => {
           align="center"
           mx="auto"
         >
-          <Link>Tasks</Link>
-          <Link>Datasets</Link>
+          <GLink to="/tasks">
+            <Link as="span">Tasks</Link>
+          </GLink>
+          <Link boxShadow="elevation1">Datasets</Link>
           <Link>Competitions</Link>
           <Link>Discussions</Link>
         </HStack>
 
         <Flex align="center" h="100%">
+          <IconButton
+            boxShadow="none"
+            mr={4}
+            w="48px"
+            borderWidth="1px"
+            aria-label="Search"
+            variant="outline"
+            icon={<SearchIcon fontSize="600" />}
+          />
+
           <GLink to="/login">
-            <Button size="md" variant="primaryBlueBerryBlueDark" mr={4}>
+            <Button size="md" variant="outline" mr={4}>
               Sign In
             </Button>
           </GLink>
           <GLink to="/signup">
-            <Button size="md" variant="outline_md">
+            <Button size="md" variant="primaryBlueBerryBlueDark">
               Register
             </Button>
           </GLink>

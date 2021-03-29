@@ -17,7 +17,7 @@ export default {
   romanSilver: {
     base: "#7E848D",
     dark: "#4C5157",
-    light: "#F4F5F5",
+    light: "#F9F9FA",
   },
   blueberryBlue: {
     base: "#35497F",

@@ -15,7 +15,7 @@ const IndexPage = () => {
         borderRadius="base"
         as="section"
         overflow="hidden"
-        maxW="container.xl"
+        maxW="full"
       >
         <Image
           zIndex={0}
@@ -54,7 +54,7 @@ const IndexPage = () => {
             <Button mr={6} variant="primaryBlueBerryBlueDark" size="lg">
               Try dataforest
             </Button>
-            <Button variant="outline_md" size="lg">
+            <Button variant="outline" size="lg">
               Earn Money
             </Button>
           </Box>

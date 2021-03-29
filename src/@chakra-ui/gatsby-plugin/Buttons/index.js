@@ -2,8 +2,17 @@ export default {
   baseStyle: {
     borderRadius: "base",
     fontWeight: "regular",
+    _focus: {
+      boxShadow: "unset",
+    },
   },
   sizes: {
+    sm: {
+      h: "40px",
+      fontSize: "500",
+      fontWeight: "500",
+      px: "1rem",
+    },
     md: {
       h: "48px",
       px: "1rem",
@@ -23,21 +32,32 @@ export default {
         bg: "blueberryBlue.base",
       },
     },
-    primaryBlueBerryBlueBase: {
-      color: "white",
-      bg: "blueberryBlue.base",
-      border: "none",
-      _hover: {
-        bg: "blueberryBlue.dark",
-      },
-    },
-    outline_md: {
+
+    outline: {
       bg: "white",
       color: "text.dark",
       borderColor: "outline.medium",
       borderWidth: "0.5px",
       _hover: {
-        bg: "charlestonGreen.light",
+        bg: "white",
+        borderColor: "text.dark",
+      },
+    },
+    sideMenu: {
+      fontSize: "500",
+      w: "100%",
+      color: "romanSilver.base",
+      textAlign: "left",
+      justifyContent: "unset",
+      _hover: { bg: "babyBlueEyes.light", color: "babyBlueEyes.dark" },
+      borderRadius: "base",
+      pl: 4,
+    },
+    persianGreen: {
+      bg: "persianGreen.base",
+      color: "white",
+      _hover: {
+        bg: "persianGreen.dark",
       },
     },
     black: {
@@ -45,13 +65,13 @@ export default {
       color: "white",
       border: "none",
       _hover: {
-        bg: "blackAlpha.800",
+        bg: "charlestonGreen.dark",
       },
     },
   },
   // default values for `size` and `variant`
   defaultProps: {
     size: "md",
-    variant: "primaryBlueBerryBlue",
+    variant: "outline",
   },
 };
