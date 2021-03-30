@@ -7,8 +7,15 @@ export default {
     },
   },
   sizes: {
+    xxs: {
+      h: "24px",
+      fontSize: 300,
+      px: 2,
+      py: 1,
+    },
     xs: {
       h: "36px",
+      fontSize: "500",
       px: "0.5rem",
     },
     sm: {
@@ -36,12 +43,23 @@ export default {
         bg: "blueberryBlue.base",
       },
     },
+    babyBlue: {
+      color: "white",
+      bg: "babyBlueEyes.dark",
+      border: "none",
+      _hover: {
+        bg: "babyBlueEyes.base",
+      },
+    },
 
     outline: {
       bg: "white",
       color: "text.dark",
       borderColor: "outline.medium",
       borderWidth: "0.5px",
+      _active: {
+        bg: "white",
+      },
       _hover: {
         bg: "white",
         borderColor: "text.dark",

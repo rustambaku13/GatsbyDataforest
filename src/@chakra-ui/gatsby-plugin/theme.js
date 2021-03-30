@@ -12,6 +12,7 @@ import shadows from "./BoxShadow";
 import Text from "./Text";
 import Tabs from "./Tabs";
 import space from "./space";
+import Menu from "./Menu";
 import Tag from "./Tags";
 const theme = {
   colors,
@@ -30,6 +31,7 @@ const theme = {
 
   components: {
     Tag,
+    Menu,
     Button,
     Input,
     Checkbox,
