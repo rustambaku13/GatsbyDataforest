@@ -12,6 +12,7 @@ import shadows from "./BoxShadow";
 import Text from "./Text";
 import Tabs from "./Tabs";
 import space from "./space";
+import Tag from "./Tags";
 const theme = {
   colors,
   fontSizes,
@@ -28,6 +29,7 @@ const theme = {
   },
 
   components: {
+    Tag,
     Button,
     Input,
     Checkbox,

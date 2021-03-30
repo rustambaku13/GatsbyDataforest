@@ -1,11 +1,9 @@
 export default {
-  parts: ["tablist.button"],
-
   baseStyle: {},
   variants: {
     line: {
       tablist: {
-        borderColor: "outline.medium",
+        borderColor: "transparent",
         button: {
           color: "outline.base",
           fontSize: "500",
@@ -19,6 +17,7 @@ export default {
           },
           pl: "0px",
           pr: 10,
+          mr: 4,
           pb: 4,
         },
       },

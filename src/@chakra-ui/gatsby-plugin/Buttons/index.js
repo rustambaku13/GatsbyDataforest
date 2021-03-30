@@ -7,6 +7,10 @@ export default {
     },
   },
   sizes: {
+    xs: {
+      h: "36px",
+      px: "0.5rem",
+    },
     sm: {
       h: "40px",
       fontSize: "500",

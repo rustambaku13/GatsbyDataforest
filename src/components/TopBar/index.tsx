@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { NotificationIcon } from "../../icons/jsx/badge copy";
+import { NotificationIcon } from "../../icons/jsx/notification";
 import { ChevronDownIcon } from "../../icons/jsx/chevrondown";
 import { SearchIcon } from "../../icons/jsx/search";
 export const TopBar = () => {
