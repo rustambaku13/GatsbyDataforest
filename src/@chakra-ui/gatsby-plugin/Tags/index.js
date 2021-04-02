@@ -38,8 +38,8 @@ export default {
     md: {
       container: {
         px: 3,
-        py: 1,
-        fontSize: 300,
+        py: 3,
+        fontSize: 400,
         borderRadius: "base",
       },
     },

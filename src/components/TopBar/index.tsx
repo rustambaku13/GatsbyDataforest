@@ -67,7 +67,7 @@ export const TopBar = () => {
               <ChevronDownIcon
                 mb="3px"
                 d="inline-block"
-                transition="0.1s ease-in-out"
+                transition="0.2s ease-in-out"
                 style={open ? { transform: "rotate(-180deg)" } : {}}
               />
             </MenuButton>

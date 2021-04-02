@@ -12,7 +12,7 @@ export default {
   persianGreen: {
     base: "#0A9483",
     dark: "#094E46",
-    light: "F1F8F8",
+    light: "#F1F8F8",
   },
   romanSilver: {
     base: "#7E848D",

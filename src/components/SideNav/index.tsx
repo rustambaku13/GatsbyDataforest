@@ -8,7 +8,7 @@ import { CompetitionIcon } from "../../icons/jsx/competition";
 import { DiscussionIcon } from "../../icons/jsx/discussions";
 import { ChevronDownIcon } from "../../icons/jsx/chevrondown";
 import { BadgeIcon } from "../../icons/jsx/badge";
-import { Link as GLink } from "gatsby";
+import { Link as GLink, navigate } from "gatsby";
 export const SideNav = () => {
   return (
     <Flex
@@ -41,6 +41,9 @@ export const SideNav = () => {
         </Box>
         <Box py="4px" px={4} h="56px" w="100%">
           <Button
+            onClick={() => {
+              navigate("/tasks");
+            }}
             leftIcon={<TaskIcon mr={1} fontSize="1.25em" />}
             variant="sideMenu"
           >

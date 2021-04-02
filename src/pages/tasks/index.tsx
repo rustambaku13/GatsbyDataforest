@@ -3,41 +3,32 @@ import {
   Button,
   Flex,
   Heading,
-  Tab,
-  TabList,
-  TabPanel,
-  Text,
-  TabPanels,
-  Tabs,
-  Link,
-  Tag,
-  Stack,
   HStack,
-  TagLabel,
-  VStack,
-} from "@chakra-ui/react";
-import {
+  Link,
   Menu,
   MenuButton,
-  MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuIcon,
-  MenuCommand,
-  MenuDivider,
+  MenuList,
+  Tab,
+  TabList,
+  Tabs,
+  Tag,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
+import { Router } from "@reach/router";
 import { Link as GLink } from "gatsby";
 import * as React from "react";
 import { SideNav } from "../../components/SideNav";
 import { PublicTask } from "../../components/Task/PublicTask";
 import { TopBar } from "../../components/TopBar";
 import { dummy_tasks } from "../../dataSource/tasks";
+import SpecificTaskPage from "../../dynamic/Task/SpecificTask";
 import { ChevronDownIcon } from "../../icons/jsx/chevrondown";
 import { CupIcon } from "../../icons/jsx/cup";
 import { FilterIcon } from "../../icons/jsx/filter";
 import { PlusIcon } from "../../icons/jsx/plus";
+
 const IndexPage = () => {
   return (
     <>
@@ -76,8 +67,10 @@ const IndexPage = () => {
                   <Menu>
                     <MenuButton
                       color="romanSilver.base"
-                      mr={4}
                       variant="outline"
+                      _active={{ bg: "white" }}
+                      _hover={{ borderColor: "outline.medium", bg: "white" }}
+                      mr={4}
                       size="xs"
                       bg="transparent"
                       as={Button}
@@ -93,6 +86,7 @@ const IndexPage = () => {
                         New
                         <ChevronDownIcon
                           ml="4px"
+                          _active={{ color: "red" }}
                           fontSize="0.5rem"
                           d="inline-flex"
                         />
@@ -114,6 +108,8 @@ const IndexPage = () => {
                     <MenuButton
                       color="romanSilver.base"
                       variant="outline"
+                      _active={{ bg: "white" }}
+                      _hover={{ borderColor: "outline.medium", bg: "white" }}
                       bg="transparent"
                       size="xs"
                       as={Button}
@@ -287,5 +283,12 @@ const IndexPage = () => {
     </>
   );
 };
-
-export default IndexPage;
+const IndexRouter = () => {
+  return (
+    <Router basepath="/tasks">
+      <SpecificTaskPage path="/:taskId" />
+      <IndexPage default />
+    </Router>
+  );
+};
+export default IndexRouter;

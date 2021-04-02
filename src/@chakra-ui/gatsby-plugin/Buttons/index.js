@@ -21,7 +21,6 @@ export default {
     sm: {
       h: "40px",
       fontSize: "500",
-      fontWeight: "500",
       px: "1rem",
     },
     md: {
@@ -72,6 +71,8 @@ export default {
       textAlign: "left",
       justifyContent: "unset",
       _hover: { bg: "babyBlueEyes.light", color: "babyBlueEyes.dark" },
+      _selected: { bg: "babyBlueEyes.light", color: "babyBlueEyes.dark" },
+      _focus: { bg: "babyBlueEyes.light", color: "babyBlueEyes.dark" },
       borderRadius: "base",
       pl: 4,
     },

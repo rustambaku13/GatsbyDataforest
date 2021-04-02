@@ -5,6 +5,9 @@ export default {
       borderRadius: "base",
     },
     button: {
+      _hover: {
+        bg: "white",
+      },
       _active: {
         bg: "white",
       },

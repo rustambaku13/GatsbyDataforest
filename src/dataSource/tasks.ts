@@ -2,6 +2,7 @@ import { Tasks } from "./../types/task";
 export const dummy_tasks: Tasks = {
   results: [
     {
+      id: "132442",
       title: "Images of Cats for a simple research",
       description: "I need 1000 images of cats for my research project",
       tags: ["Trains", "Animals", "Cats", "Mammals"],
@@ -16,11 +17,56 @@ export const dummy_tasks: Tasks = {
       extension: "jpg",
       image_type: "rgb",
       complexity: "hard",
-      labels: 10,
       type: "image",
       price: 200,
+      labels: [
+        {
+          name: "eyes",
+          description: "Eyes of the cat",
+          attendancy: "R",
+          cardinality: "M",
+          is_annotation: true,
+          children: [
+            {
+              name: "pupil",
+              description: "Pupil inside the eye",
+              attendancy: "R",
+              cardinality: "S",
+              is_annotation: true,
+              children: [
+                {
+                  name: "color",
+                  description: "Color of the pupil",
+                  attendancy: "R",
+                  cardinality: "S",
+                  is_annotation: false,
+                  label_type: "text",
+                },
+
+                {
+                  name: "radius",
+                  description: "Radius of the pupil in cm",
+                  attendancy: "R",
+                  cardinality: "S",
+                  is_annotation: false,
+                  label_type: "number",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "number_of_cats",
+          description: "How many cats are there is the image",
+          attendancy: "R",
+          cardinality: "S",
+          is_annotation: false,
+          label_type: "number",
+        },
+      ],
     },
     {
+      id: "132442",
       title: "Images of Cats for a simple research",
       description: "I need 1000 images of cats for my research project",
       tags: ["Trains", "Animals", "Cats", "Mammals"],
@@ -35,11 +81,56 @@ export const dummy_tasks: Tasks = {
       extension: "jpg",
       image_type: "rgb",
       complexity: "hard",
-      labels: 10,
       type: "image",
       price: 200,
+      labels: [
+        {
+          name: "eyes",
+          description: "Eyes of the cat",
+          attendancy: "R",
+          cardinality: "M",
+          is_annotation: true,
+          children: [
+            {
+              name: "pupil",
+              description: "Pupil inside the eye",
+              attendancy: "R",
+              cardinality: "S",
+              is_annotation: true,
+              children: [
+                {
+                  name: "color",
+                  description: "Color of the pupil",
+                  attendancy: "R",
+                  cardinality: "S",
+                  is_annotation: false,
+                  label_type: "text",
+                },
+
+                {
+                  name: "radius",
+                  description: "Radius of the pupil in cm",
+                  attendancy: "R",
+                  cardinality: "S",
+                  is_annotation: false,
+                  label_type: "number",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "number_of_cats",
+          description: "How many cats are there is the image",
+          attendancy: "R",
+          cardinality: "S",
+          is_annotation: false,
+          label_type: "number",
+        },
+      ],
     },
     {
+      id: "132442",
       title: "Images of Cats for a simple research",
       description: "I need 1000 images of cats for my research project",
       tags: ["Trains", "Animals", "Cats", "Mammals"],
@@ -54,11 +145,56 @@ export const dummy_tasks: Tasks = {
       extension: "jpg",
       image_type: "rgb",
       complexity: "hard",
-      labels: 10,
       type: "image",
       price: 200,
+      labels: [
+        {
+          name: "eyes",
+          description: "Eyes of the cat",
+          attendancy: "R",
+          cardinality: "M",
+          is_annotation: true,
+          children: [
+            {
+              name: "pupil",
+              description: "Pupil inside the eye",
+              attendancy: "R",
+              cardinality: "S",
+              is_annotation: true,
+              children: [
+                {
+                  name: "color",
+                  description: "Color of the pupil",
+                  attendancy: "R",
+                  cardinality: "S",
+                  is_annotation: false,
+                  label_type: "text",
+                },
+
+                {
+                  name: "radius",
+                  description: "Radius of the pupil in cm",
+                  attendancy: "R",
+                  cardinality: "S",
+                  is_annotation: false,
+                  label_type: "number",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "number_of_cats",
+          description: "How many cats are there is the image",
+          attendancy: "R",
+          cardinality: "S",
+          is_annotation: false,
+          label_type: "number",
+        },
+      ],
     },
     {
+      id: "132442",
       title: "Images of Cats for a simple research",
       description: "I need 1000 images of cats for my research project",
       tags: ["Trains", "Animals", "Cats", "Mammals"],
@@ -73,9 +209,56 @@ export const dummy_tasks: Tasks = {
       extension: "jpg",
       image_type: "rgb",
       complexity: "hard",
-      labels: 10,
       type: "image",
       price: 200,
+      labels: [
+        {
+          name: "eyes",
+          description: "Eyes of the cat",
+          attendancy: "R",
+          cardinality: "M",
+          is_annotation: true,
+          children: [
+            {
+              name: "pupil",
+              description: "Pupil inside the eye",
+              attendancy: "R",
+              cardinality: "S",
+              is_annotation: true,
+              children: [
+                {
+                  name: "color",
+                  description: "Color of the pupil",
+                  attendancy: "R",
+                  cardinality: "S",
+                  is_annotation: false,
+                  label_type: "text",
+                  children: [],
+                },
+
+                {
+                  name: "radius",
+                  description: "Radius of the pupil in cm",
+                  attendancy: "R",
+                  cardinality: "S",
+                  is_annotation: false,
+                  label_type: "number",
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "number_of_cats",
+          description: "How many cats are there is the image",
+          attendancy: "R",
+          cardinality: "S",
+          is_annotation: false,
+          label_type: "number",
+          children: [],
+        },
+      ],
     },
   ],
 };

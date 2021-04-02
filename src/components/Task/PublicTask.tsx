@@ -12,42 +12,77 @@ import moment from "moment";
 import { chakra } from "@chakra-ui/system";
 import React from "react";
 import { Task } from "../../types/task";
-import { Link as Glink } from "gatsby";
+import { Link as Glink, navigate } from "gatsby";
 import { Tag } from "@chakra-ui/tag";
 import { Button } from "@chakra-ui/button";
+import { VStack } from "@chakra-ui/layout";
 
 export const PublicTask = chakra(
   ({ task, className }: { task: Task; className?: any }) => {
     return (
-      <Flex py="20px" w="100%" bg="white" borderRadius="base">
-        <Box pl={6} flex={2}>
-          <Glink to="/profile/rustambaku13">
-            <Link fontSize="300" color="babyBlueEyes.dark">
-              @rustambaku13
-            </Link>
-          </Glink>
-          <Text
-            mt={1}
-            as="h3"
-            fontSize="500"
-            color="text.dark"
-            fontWeight="500"
-          >
-            {task.title}
-          </Text>
+      <Flex
+        _hover={{ boxShadow: "elevation_6" }}
+        cursor="pointer"
+        py="20px"
+        w="100%"
+        onClick={() => {
+          navigate(`/tasks/${task.id}`);
+        }}
+        px={6}
+        bg="white"
+        borderRadius="base"
+      >
+        <Box flex={2}>
+          <Flex>
+            <Box flex={1}>
+              <Glink to="/profile/rustambaku13">
+                <Link fontSize="400" color="babyBlueEyes.dark">
+                  @rustambaku13
+                </Link>
+              </Glink>
+
+              <Text as="h3" fontSize="600" color="text.dark" fontWeight="500">
+                {task.title}
+              </Text>
+            </Box>
+          </Flex>
           <Divider my={4} />
-          <SimpleGrid spacingY={3} fontSize="300" columns={4}>
+          <SimpleGrid spacingY={3} fontSize="400" columns={4}>
+            <Box>
+              <Text variant="secondary" as="label">
+                File Extension
+              </Text>
+              <Text color="black" textTransform="uppercase">
+                {task.extension}
+              </Text>
+            </Box>{" "}
+            <Box>
+              <Text variant="secondary" as="label">
+                Image scale
+              </Text>
+              <Text color="black" textTransform="uppercase">
+                {task.image_type}
+              </Text>
+            </Box>
+            <Box>
+              <Text variant="secondary" as="label">
+                Complexity
+              </Text>
+              <Text textTransform="capitalize" variant={task.complexity}>
+                {task.complexity}
+              </Text>
+            </Box>{" "}
+            <Box>
+              <Text variant="secondary" as="label">
+                Labels
+              </Text>
+              <Text color="black">{task.labels.length}</Text>
+            </Box>
             <Box>
               <Text variant="secondary" as="label">
                 Filled
               </Text>
               <Text color="black">{`${task.filled} / ${task.quantity}`}</Text>
-            </Box>
-            <Box>
-              <Text variant="secondary" as="label">
-                Price(per datum)
-              </Text>
-              <Text color="black">{`$ ${task.price_per_datum}`}</Text>
             </Box>
             <Box>
               <Text variant="secondary" as="label">
@@ -65,33 +100,11 @@ export const PublicTask = chakra(
             </Box>
             <Box>
               <Text variant="secondary" as="label">
-                File Extension
+                Expiration date
               </Text>
-              <Text color="black" textTransform="uppercase">
-                {task.extension}
+              <Text color="black">
+                {moment(task.deadline).format("DD.MM.YYYY")}
               </Text>
-            </Box>
-            <Box>
-              <Text variant="secondary" as="label">
-                Image scale
-              </Text>
-              <Text color="black" textTransform="uppercase">
-                {task.image_type}
-              </Text>
-            </Box>
-            <Box>
-              <Text variant="secondary" as="label">
-                Complexity
-              </Text>
-              <Text textTransform="capitalize" variant={task.complexity}>
-                {task.complexity}
-              </Text>
-            </Box>
-            <Box>
-              <Text variant="secondary" as="label">
-                Labels
-              </Text>
-              <Text color="black">{task.labels}</Text>
             </Box>
           </SimpleGrid>
         </Box>
@@ -99,7 +112,15 @@ export const PublicTask = chakra(
         <Box flex="0 0 1px">
           <Divider orientation="vertical" mx={6} />
         </Box>
-        <Box fontSize="300" minW="220px" flex="1 0 0px">
+        <Box fontSize="400" minW="220px" flex="1 0 0px">
+          <Box mb={4}>
+            <Text variant="secondary" as="label">
+              Price (per datum)
+            </Text>
+            <Text color="persianGreen.base" fontSize="600" fontWeight="500">
+              $ {task.price_per_datum}
+            </Text>
+          </Box>
           <Text variant="secondary" as="label">
             Tags
           </Text>
@@ -110,15 +131,6 @@ export const PublicTask = chakra(
               </Tag>
             ))}
           </HStack>
-          <Text variant="secondary" as="label">
-            Expiration Date
-          </Text>
-          <Text mt={2} color="black">
-            {moment(task.deadline).format("DD.MM.YYYY")}
-          </Text>
-          <Button variant="babyBlue" mt={2} size="xxs">
-            View Task
-          </Button>
         </Box>
       </Flex>
     );

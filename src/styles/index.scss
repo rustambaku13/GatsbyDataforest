@@ -30,6 +30,28 @@
   font-weight: 900;
 }
 
+.label-dropdown {
+  &[aria-expanded="true"],
+  li[aria-expanded="true"] {
+    height: auto;
+  }
+  button[aria-expanded="true"] + ul {
+    display: block;
+  }
+  button[aria-expanded="true"] svg {
+    transform: rotate(-180deg);
+  }
+  ul {
+    width: 100%;
+  }
+  li {
+    color: black;
+    padding-left: 1rem;
+    list-style-type: none;
+    width: 100%;
+  }
+}
+
 input:focus ~ label,
 input:valid ~ label {
   top: 0;
