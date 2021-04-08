@@ -1,0 +1,23 @@
+export default {
+  baseStyle: {
+    px: 1,
+    py: "2px",
+    textTransform: "capitalize",
+    borderRadius: "base",
+    fontSize: "300",
+  },
+  variants: {
+    accepted: {
+      bg: "success.light",
+      color: "success.dark",
+    },
+    rejected: {
+      bg: "warning.light",
+      color: "warning.dark",
+    },
+    pending: {
+      bg: "danger.light",
+      color: "danger.dark",
+    },
+  },
+};

@@ -1,6 +1,22 @@
 export default {
   baseStyle: {},
   variants: {
+    buttons: {
+      tab: {
+        borderWidth: "1px",
+        h: "36px",
+        w: "36px",
+        borderRadius: "base",
+        fontSize: "600",
+        bg: "white",
+        borderColor: "babyBlueEyes.dark",
+        color: "romanSilver.base",
+        _selected: {
+          color: "babyBlueEyes.dark",
+        },
+      },
+    },
+
     line: {
       tablist: {
         borderColor: "transparent",

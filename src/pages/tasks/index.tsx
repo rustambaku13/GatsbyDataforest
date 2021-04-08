@@ -66,13 +66,9 @@ const IndexPage = () => {
                 <Box ml="auto">
                   <Menu>
                     <MenuButton
-                      color="romanSilver.base"
-                      variant="outline"
-                      _active={{ bg: "white" }}
-                      _hover={{ borderColor: "outline.medium", bg: "white" }}
+                      variant="dropdown_button"
                       mr={4}
                       size="xs"
-                      bg="transparent"
                       as={Button}
                     >
                       Sort by:
@@ -105,15 +101,7 @@ const IndexPage = () => {
                     </MenuList>
                   </Menu>
                   <Menu>
-                    <MenuButton
-                      color="romanSilver.base"
-                      variant="outline"
-                      _active={{ bg: "white" }}
-                      _hover={{ borderColor: "outline.medium", bg: "white" }}
-                      bg="transparent"
-                      size="xs"
-                      as={Button}
-                    >
+                    <MenuButton variant="dropdown_button" size="xs" as={Button}>
                       <FilterIcon mr="8px" d="inline-flex" />
                       <Text
                         as="span"

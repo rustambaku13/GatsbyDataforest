@@ -64,6 +64,15 @@ export default {
         borderColor: "text.dark",
       },
     },
+    dropdown_button: {
+      borderColor: "outline.medium",
+      fontSize: 500,
+      borderWidth: "0.5px",
+      bg: "transparent",
+      color: "romanSilver.base",
+      _hover: { borderColor: "outline.medium", bg: "white" },
+      _active: { bg: "white" },
+    },
     sideMenu: {
       fontSize: "500",
       w: "100%",

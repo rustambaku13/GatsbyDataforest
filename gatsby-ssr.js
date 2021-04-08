@@ -4,8 +4,8 @@ import { Modals } from "./src/components/Layout/Modals";
 export const wrapPageElement = ({ element }) => {
   return (
     <>
-      {element}
       <Modals />
+      {element}
     </>
   );
 };

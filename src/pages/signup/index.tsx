@@ -78,7 +78,7 @@ const IndexPage = () => {
               </FormControl>
 
               <Flex w="100%">
-                <Checkbox mb="1px" size="md" mr={2}></Checkbox>
+                <Checkbox variant="dark" mb="1px" size="md" mr={2}></Checkbox>
                 <Text
                   d="inline-block"
                   color="romanSilver.base"

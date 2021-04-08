@@ -24,7 +24,9 @@ import { UploadIcon } from "../../icons/jsx/upload";
 import {
   generateLabelRenders,
   LabelsDropDown,
-} from "../Dropdown/LabelsDropDown";
+} from "../Labels/Dropdown/LabelsDropDown";
+import { AuthProtectedClick } from "../../helpers/protectedClicks";
+import LayoutStore from "../../store/LayoutStore";
 
 export const BigPublicTak = chakra(
   ({ task, className }: { task: Task; className?: any }) => {
@@ -155,7 +157,13 @@ export const BigPublicTak = chakra(
           <TrackIcon mr={1} />
           Track
         </Button>{" "}
-        <Button variant="babyBlue" size="sm">
+        <Button
+          onClick={AuthProtectedClick(() => {
+            LayoutStore.uploadDataModalOpen("yes");
+          })}
+          variant="babyBlue"
+          size="sm"
+        >
           <UploadIcon mr={1} /> Upload Data
         </Button>
       </Box>

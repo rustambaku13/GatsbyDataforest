@@ -2,10 +2,11 @@ import { Button } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
 import React, { useState } from "react";
-import { ChevronDownIcon } from "../../icons/jsx/chevrondown";
-import { TaskIcon } from "../../icons/jsx/task";
-import { Label, Task } from "../../types/task";
-import { MiniLabelsType } from "../Labels/MiniLabelsType";
+import { ChevronDownIcon } from "../../../icons/jsx/chevrondown";
+import { TaskIcon } from "../../../icons/jsx/task";
+import LayoutStore from "../../../store/LayoutStore";
+import { Label, Task } from "../../../types/task";
+import { MiniLabelsType } from "../../Labels/MiniLabelsType";
 
 export const generateLabelRenders = ({ task }: { task: Task }) => {
   // Generate all React components for performance reasons
@@ -49,6 +50,9 @@ const LabelListItem = ({
     <Box
       _hover={{ bg: "romanSilver.light" }}
       aria-expanded={expanded}
+      onClick={() => {
+        LayoutStore.labelDescriptionModalOpen(label);
+      }}
       h="36px"
       as="li"
     >

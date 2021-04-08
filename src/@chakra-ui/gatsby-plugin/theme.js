@@ -14,6 +14,8 @@ import Tabs from "./Tabs";
 import space from "./space";
 import Menu from "./Menu";
 import Tag from "./Tags";
+import Badge from "./Badge";
+import Modal from "./Modal";
 const theme = {
   colors,
   fontSizes,
@@ -31,10 +33,12 @@ const theme = {
 
   components: {
     Tag,
+    Modal,
     Menu,
     Button,
     Input,
     Checkbox,
+    Badge,
     Text,
     FormLabel,
     Tabs,

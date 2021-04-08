@@ -52,7 +52,7 @@ export default {
   success: {
     base: "#54B085",
     dark: "#409160",
-    success: "#E5F3EC",
+    light: "#E5F3EC",
   },
   warning: {
     base: "#F4B248",
