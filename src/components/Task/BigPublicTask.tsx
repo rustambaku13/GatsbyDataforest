@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { chakra } from "@chakra-ui/system";
 import { Tag } from "@chakra-ui/tag";
-import { Link as Glink } from "gatsby";
+import { Link as Glink, navigate } from "gatsby";
 import React, { useEffect } from "react";
 import moment from "moment";
 import { Task } from "../../types/task";
@@ -27,6 +27,7 @@ import {
 } from "../Labels/Dropdown/LabelsDropDown";
 import { AuthProtectedClick } from "../../helpers/protectedClicks";
 import LayoutStore from "../../store/LayoutStore";
+import LabelingStore from "../../store/LabelingStore";
 
 export const BigPublicTak = chakra(
   ({ task, className }: { task: Task; className?: any }) => {
@@ -159,7 +160,10 @@ export const BigPublicTak = chakra(
         </Button>{" "}
         <Button
           onClick={AuthProtectedClick(() => {
-            LayoutStore.uploadDataModalOpen("yes");
+            LayoutStore.uploadDataModalOpen(() => {
+              LabelingStore.setTask(task);
+              navigate("/labeling");
+            });
           })}
           variant="babyBlue"
           size="sm"

@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/button";
+import { Button, IconButton } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
 import React, { useState } from "react";
@@ -9,7 +9,7 @@ import { Label, Task } from "../../../types/task";
 import { MiniLabelsType } from "../../Labels/MiniLabelsType";
 
 export const generateLabelRenders = ({ task }: { task: Task }) => {
-  // Generate all React components for performance reasons
+  // Generate all React components for performance reasons for a given label
   const labels = task.labels;
   const labelStack = [...labels.reverse()];
   const renderedStack = [];
@@ -48,7 +48,6 @@ const LabelListItem = ({
   const [expanded, setExpanded] = useState(false);
   return (
     <Box
-      _hover={{ bg: "romanSilver.light" }}
       aria-expanded={expanded}
       onClick={() => {
         LayoutStore.labelDescriptionModalOpen(label);
@@ -61,9 +60,6 @@ const LabelListItem = ({
         w="100%"
         variant="unstyled"
         justifyContent="start"
-        onClick={() => {
-          setExpanded((expanded) => !expanded);
-        }}
         aria-expanded={expanded}
         display="flex"
         alignItems="center"
@@ -72,12 +68,28 @@ const LabelListItem = ({
         <MiniLabelsType mr={2} label={label} />
         {label.name}
         {label.children?.length ? (
-          <ChevronDownIcon
-            transition="0.2s ease-in-out"
-            ml={1}
-            fontSize="300"
+          <IconButton
+            aria-label="expand"
+            onClick={(e) => {
+              e.stopPropagation();
+              setExpanded((expanded) => !expanded);
+            }}
+            icon={<ChevronDownIcon m={0} transition="0.2s ease-in-out" />}
+            fontSize="200"
+            borderWidth="0px"
+            _hover={{
+              bg: "babyBlueEyes.light",
+            }}
             color="romanSilver.base"
-          />
+            minW="unset"
+            minH="unset"
+            borderRadius="base"
+            textAlign="center"
+            h="20px"
+            w="20px"
+            p={0}
+            ml="auto"
+          ></IconButton>
         ) : null}
       </Button>
       <Box w="100%" pos="relative" display="none" role="menu" as="ul">

@@ -11,6 +11,7 @@ export const DataUploadProvider = ({ children }) => {
           setFiles((files) => [...files, ...items]);
         },
         removeFile: function (file: File) {
+          if (file.preview) URL.revokeObjectURL(file.preview);
           setFiles((files) => files.filter((item) => item != file));
         },
       }}

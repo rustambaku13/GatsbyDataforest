@@ -1,3 +1,6 @@
+/* ==========================================================================
+   GENERAL STYLES
+   ========================================================================== */
 @font-face {
   font-family: "Suisse";
   src: url("../fonts/Suisse\ Intl/SuisseIntl-Regular.otf");
@@ -29,7 +32,23 @@
   src: url("../fonts/Suisse\ Intl/SuisseIntl-Black.otf");
   font-weight: 900;
 }
+/* ==========================================================================
+   OVERRIDING DEFAULT STYLES
+   ========================================================================== */
+input:focus ~ label,
+input:valid ~ label {
+  top: 0;
+  left: 0.5rem;
+  z-index: 2;
+  background-color: white;
+  font-size: 0.75rem;
+  color: #535283;
+  padding: 2px 4px;
+}
 
+/* ==========================================================================
+   SMALL COMPONENTS
+   ========================================================================== */
 .label-dropdown {
   &[aria-expanded="true"],
   li[aria-expanded="true"] {
@@ -41,6 +60,9 @@
   button[aria-expanded="true"] svg {
     transform: rotate(-180deg);
   }
+  > ul {
+    padding-right: 1rem;
+  }
   ul {
     width: 100%;
   }
@@ -51,14 +73,27 @@
     width: 100%;
   }
 }
+.scrollbar {
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+  }
 
-input:focus ~ label,
-input:valid ~ label {
-  top: 0;
-  left: 0.5rem;
-  z-index: 2;
-  background-color: white;
-  font-size: 0.75rem;
-  color: #535283;
-  padding: 2px 4px;
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #1a2936;
+
+    background-image: -webkit-gradient(
+      linear,
+      0 0,
+      0 100%,
+      color-stop(0.5, #1a2936),
+      color-stop(0.5, transparent),
+      to(transparent)
+    );
+  }
 }

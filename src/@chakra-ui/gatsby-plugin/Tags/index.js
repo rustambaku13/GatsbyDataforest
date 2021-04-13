@@ -35,6 +35,14 @@ export default {
     },
   },
   sizes: {
+    sm: {
+      container: {
+        px: 2,
+        py: 1,
+        fontSize: 500,
+        borderRadius: "base",
+      },
+    },
     md: {
       container: {
         px: 3,
@@ -53,7 +61,7 @@ export default {
     },
   },
   defaultProps: {
-    variant: "dataforest-button",
-    size: "lg",
+    variant: "dataforest-tag",
+    size: "sm",
   },
 };

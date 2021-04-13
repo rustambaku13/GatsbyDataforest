@@ -1,7 +1,11 @@
 import { makeAutoObservable } from "mobx";
 import { Label } from "../types/task";
 
-// Everything relating to layout, Modals popovers and etc.
+/*
+  ================================================
+    LAYOUT RELATED STUFF. 
+  ================================================
+*/
 class LayoutStore {
   labelDescriptionModalData: Label | null = null;
   uploadDataModalCallback: any = null;

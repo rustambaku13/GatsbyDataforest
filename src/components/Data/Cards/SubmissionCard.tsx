@@ -9,7 +9,11 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { Submission } from "../../../types/submission";
-
+/*
+===============================
+Submission Card that is used in Specific Tasks Page
+===============================
+*/
 export const SubmissionCard = chakra(
   ({ className, submission }: { className?: any; submission: Submission }) => {
     return (

@@ -47,7 +47,7 @@ export default {
       bg: "babyBlueEyes.dark",
       border: "none",
       _hover: {
-        bg: "babyBlueEyes.base",
+        bg: "blueberryBlue.base",
       },
     },
 

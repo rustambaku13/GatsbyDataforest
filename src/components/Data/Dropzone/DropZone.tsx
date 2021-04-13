@@ -5,6 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { DataUploadContext } from "../../../context/DataUploadContext";
 import { UploadIcon } from "../../../icons/jsx/upload";
 import { ProgressBar } from "../Progress/ProgressBar";
+
 export const DropZone = ({ Card }: { Card?: any }) => {
   const context = React.useContext(DataUploadContext);
 
@@ -25,7 +26,7 @@ export const DropZone = ({ Card }: { Card?: any }) => {
       // Make sure to revoke the data uris to avoid memory leaks
       context.files.forEach((file) => URL.revokeObjectURL(file.preview));
     },
-    [context.files]
+    []
   );
 
   return (
@@ -72,7 +73,7 @@ export const DropZone = ({ Card }: { Card?: any }) => {
           Browse images
         </Button>
       </Center>
-      {Card && context.files.length ? (
+      {/* {Card && context.files.length ? (
         <Box
           maxH="700px"
           overflowY="auto"
@@ -83,7 +84,7 @@ export const DropZone = ({ Card }: { Card?: any }) => {
             <Card progress={<ProgressBar progress="100" />} file={file} />
           ))}
         </Box>
-      ) : null}
+      ) : null} */}
     </>
   );
 };
