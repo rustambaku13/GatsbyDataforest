@@ -12,7 +12,7 @@ const LabelingToolPage = () => {
     <>
       <Flex pos="relative" overflow="hidden" h="100vh" w="100vw">
         <DataDisplayer />
-        <LabelsDisplayer />
+        {/* <LabelsDisplayer /> */}
         <DrawingCanvas />
       </Flex>
     </>

@@ -36,6 +36,7 @@ export const DataCard = chakra(
         w="100%"
         className={className}
         px={4}
+        py={2}
         bg="white"
       >
         <AspectRatio
