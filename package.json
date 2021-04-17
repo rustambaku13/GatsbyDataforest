@@ -29,6 +29,7 @@
     "mobx-react-lite": "^3.2.0",
     "moment": "^2.29.1",
     "paper": "^0.12.15",
+    "paper-jsdom": "^0.12.15",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.3.2",

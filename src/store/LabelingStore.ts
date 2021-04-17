@@ -1,7 +1,6 @@
-import { Task } from "./../types/task";
 import { makeAutoObservable } from "mobx";
-import { Label } from "../types/task";
-import paper from "paper";
+import { Task } from "./../types/task";
+
 /*
   ================================================
     LABELING TOOL RELATED STUFF 
