@@ -1,6 +1,6 @@
 import React from "react";
-import { UploadDataModal } from "../Data/Modals/UploadDataModal";
-import { LabelDescriptionModal } from "../Labels/Modals/LabelDescriptionModal";
+import { LabelDescriptionModal } from "../Modals/LabelDescriptionModal";
+import { UploadDataModal } from "../Modals/UploadDataModal";
 
 export const Modals = () => {
   return (

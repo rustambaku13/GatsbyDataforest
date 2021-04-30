@@ -1,38 +1,37 @@
 import {
   Box,
-  Flex,
-  Spinner,
-  Text,
-  Link,
-  Heading,
-  Tabs,
   Button,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
-  Stack,
-  SimpleGrid,
   Checkbox,
   CheckboxGroup,
+  Flex,
+  Heading,
+  Link,
+  SimpleGrid,
+  Spinner,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
 } from "@chakra-ui/react";
-import { range } from "../../helpers/misc";
+import { Link as GLink } from "gatsby";
+import { SideNav } from "../../components/Navigation/SideNav";
+import { SubmissionCard } from "../../components/Cards/Data/SubmissionCard";
+import { TopBar } from "../../components/Navigation/TopBar";
 import React, { useEffect, useState } from "react";
 import { getTask } from "../../api/tasks";
-import { SideNav } from "../../components/SideNav";
-import { Link as GLink } from "gatsby";
-import { BigPublicTak } from "../../components/Task/BigPublicTask";
-import { TopBar } from "../../components/TopBar";
-import { CupIcon } from "../../icons/jsx/cup";
-import { generateLabelRenders } from "../../components/Labels/Dropdown/LabelsDropDown";
+import { BigPublicTask } from "../../components/Cards/Task/BigPublicTask";
+import { dummy_submissions } from "../../dataSource/submissions";
+import { range } from "../../helpers/misc";
 import { ChevronDownIcon } from "../../icons/jsx/chevrondown";
+import { CupIcon } from "../../icons/jsx/cup";
 import { DateIcon } from "../../icons/jsx/date";
+import { DeleteIcon } from "../../icons/jsx/delete";
 import { GridIcon } from "../../icons/jsx/grid";
 import { ListIcon } from "../../icons/jsx/list";
-import { dummy_submissions } from "../../dataSource/submissions";
-import { SubmissionCard } from "../../components/Data/Cards/SubmissionCard";
 import { SelectAllIcon } from "../../icons/jsx/selectall";
-import { DeleteIcon } from "../../icons/jsx/delete";
+import { abbreviate } from "../../helpers/abbreviate";
 const SpecificTaskPage = ({ taskId }) => {
   const [task, setTask] = useState(null);
   const [selectedData, setSelectedData] = useState([]);
@@ -50,12 +49,25 @@ const SpecificTaskPage = ({ taskId }) => {
     <>
       <SideNav />
       <Flex>
-        <Box ml="264px" w="100%" minH="100vh" bg="romanSilver.light">
+        <Box ml="264px" w="100%" minH="100vh">
           <TopBar />
           <Box as="main" pt={10} px={18} w="100%">
             <Flex w="100%">
               <Box flex={1} mr={5}>
-                {task ? <BigPublicTak task={task} /> : <Spinner />}
+                <Box mb={6} color="romanSilver.base">
+                  <GLink to="/tasks">
+                    <Text
+                      as="span"
+                      color="babyBlueEyes.dark"
+                      textDecor="underline"
+                    >
+                      Tasks
+                    </Text>
+                  </GLink>
+                  &nbsp; &#183;&nbsp;
+                  <Text as="span">{abbreviate(task?.title || "")}</Text>
+                </Box>
+                {task ? <BigPublicTask task={task} /> : <Spinner />}
                 <Heading
                   mb={4}
                   as="h3"
@@ -187,8 +199,6 @@ const SpecificTaskPage = ({ taskId }) => {
                       </Flex>
                       <CheckboxGroup
                         onChange={(e) => {
-                          console.log(e);
-
                           setSelectedData(e);
                         }}
                         value={selectedData}

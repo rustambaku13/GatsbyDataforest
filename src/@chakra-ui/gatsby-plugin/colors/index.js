@@ -20,8 +20,8 @@ export default {
     light: "#F9F9FA",
   },
   blueberryBlue: {
-    base: "#35497F",
-    dark: "#27265B",
+    base: "#264879",
+    dark: "#123260",
     light: "#F1F3F9",
   },
   babyBlueEyes: {
@@ -62,7 +62,7 @@ export default {
   text: {
     dark: "#27265B",
     medium: "#535283",
-    light: "#9A9AB6",
+    light: "#A0AEC2",
     disabled: "#DEDEE5",
   },
   outline: {

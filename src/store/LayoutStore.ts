@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { Label } from "../types/task";
+import { Label } from "../types/label";
 
 /*
   ================================================

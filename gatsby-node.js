@@ -1,4 +1,15 @@
 // called after every page is created.
+
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [{ test: /node_modules\/paper/, use: loaders.null() }],
+      },
+    });
+  }
+};
+
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage } = actions;
   // Only update the `/app` page.

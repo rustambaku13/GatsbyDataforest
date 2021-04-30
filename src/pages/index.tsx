@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Center, Flex, Heading, Text, Image } from "@chakra-ui/react";
 import * as React from "react";
-import { NavbarDefault } from "../components/Navbar";
+import { NavbarDefault } from "../components/Navigation/Navbar";
 import landing_bg from "../images/landing_header_bg.png";
 const IndexPage = () => {
   return (

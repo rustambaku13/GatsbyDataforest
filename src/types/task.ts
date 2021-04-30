@@ -1,20 +1,10 @@
-export interface Label {
-  name: string;
-  description?: string;
-  is_annotation: boolean;
-  label_type?: "number" | "boolean" | "text" | "date" | "image" | "file";
-  attendancy: "R" | "O";
-  cardinality: "S" | "M";
-  render?: any;
-  choices?: any[];
-  children?: Label[];
-}
+import { TaskLabel } from "./label";
 
 export interface Task {
   title: string;
   id: string;
   deadline: Date;
-  labels: Label[];
+  labels: TaskLabel[];
   description: string;
   tags: string[];
   quantity: number;

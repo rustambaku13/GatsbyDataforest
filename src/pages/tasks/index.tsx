@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   HStack,
-  Link,
   Menu,
   MenuButton,
   MenuItem,
@@ -17,24 +16,24 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Router } from "@reach/router";
-import { Link as GLink } from "gatsby";
-import * as React from "react";
-import { SideNav } from "../../components/SideNav";
-import { PublicTask } from "../../components/Task/PublicTask";
-import { TopBar } from "../../components/TopBar";
+import React, { useState } from "react";
+import { MiniLeaderBoard } from "../../components/Cards/Leaderboard/MiniLeaderboardCard";
+import { PublicTask } from "../../components/Cards/Task/PublicTask";
+import { SideNav } from "../../components/Navigation/SideNav";
+import { TopBar } from "../../components/Navigation/TopBar";
 import { dummy_tasks } from "../../dataSource/tasks";
 import SpecificTaskPage from "../../dynamic/Task/SpecificTask";
 import { ChevronDownIcon } from "../../icons/jsx/chevrondown";
-import { CupIcon } from "../../icons/jsx/cup";
 import { FilterIcon } from "../../icons/jsx/filter";
 import { PlusIcon } from "../../icons/jsx/plus";
 
 const IndexPage = () => {
+  const [tasks, setTasks] = useState("");
   return (
     <>
       <SideNav />
       <Flex>
-        <Box ml="264px" w="100%" minH="100vh" bg="romanSilver.light">
+        <Box ml="264px" w="100%" minH="100vh">
           <TopBar />
           <Box as="main" pt={10} px={18} w="100%">
             <Flex mb={6} h="40px">
@@ -132,12 +131,12 @@ const IndexPage = () => {
                 </Box>
               </Flex>
               <HStack spacing={4} w="100%">
-                <Tag>Card</Tag>
-                <Tag>Animals</Tag>
-                <Tag>Cards</Tag>
-                <Tag>Computer Science</Tag>
-                <Tag>Cats</Tag>
-                <Tag>Data Analysis</Tag>
+                <Tag variant="dataforest-button">Card</Tag>
+                <Tag variant="dataforest-button">Animals</Tag>
+                <Tag variant="dataforest-button">Cards</Tag>
+                <Tag variant="dataforest-button">Computer Science</Tag>
+                <Tag variant="dataforest-button">Cats</Tag>
+                <Tag variant="dataforest-button">Data Analysis</Tag>
               </HStack>
               <Flex mt={6} w="100%">
                 <Box mr={5} flex={1}>
@@ -148,120 +147,12 @@ const IndexPage = () => {
                   </VStack>
                 </Box>
                 <Box flex="0 0 240px">
-                  <Box bg="white" boxShadow="elevation_6" w="100%">
-                    <Box pl={6} h="40px" w="100%">
-                      <Text
-                        letterSpacing="0.1em"
-                        fontWeight="500"
-                        fontSize="200"
-                        lineHeight="40px"
-                        color="romanSilver.base"
-                        as="label"
-                      >
-                        TOP GATHERERS
-                      </Text>
-                    </Box>
-                    <Box px={4} h="40px" w="100%">
-                      <Flex
-                        alignItems="center"
-                        fontSize="400"
-                        w="100%"
-                        h="100%"
-                        color="romanSilver.base"
-                      >
-                        <Box mr={3}>
-                          <CupIcon color="gold.base" mr={1} fontSize="1.4em" />
-                        </Box>
-                        <GLink to="/profile/rustambaku13">
-                          <Link>rustambaku13</Link>
-                        </GLink>
-                        <Text
-                          as="span"
-                          ml="auto"
-                          fontSize="400"
-                          fontWeight="500"
-                          color="black"
-                        >
-                          10
-                        </Text>
-                      </Flex>
-                    </Box>
-                    <Box px={4} h="40px" w="100%">
-                      <Flex
-                        alignItems="center"
-                        fontSize="400"
-                        w="100%"
-                        h="100%"
-                        color="romanSilver.base"
-                      >
-                        <Box mr={3}>
-                          <CupIcon color="gold.base" mr={1} fontSize="1.4em" />
-                        </Box>
-                        <GLink to="/profile/rustambaku13">
-                          <Link>kuyoku</Link>
-                        </GLink>
-                        <Text
-                          as="span"
-                          ml="auto"
-                          fontSize="400"
-                          fontWeight="500"
-                          color="black"
-                        >
-                          7
-                        </Text>
-                      </Flex>
-                    </Box>
-                    <Box px={4} h="40px" w="100%">
-                      <Flex
-                        alignItems="center"
-                        fontSize="400"
-                        w="100%"
-                        h="100%"
-                        color="romanSilver.base"
-                      >
-                        <Box mr={3}>
-                          <CupIcon color="gold.base" mr={1} fontSize="1.4em" />
-                        </Box>
-                        <GLink to="/profile/rustambaku13">
-                          <Link>abdul-rahman</Link>
-                        </GLink>
-                        <Text
-                          as="span"
-                          ml="auto"
-                          fontSize="400"
-                          fontWeight="500"
-                          color="black"
-                        >
-                          5
-                        </Text>
-                      </Flex>
-                    </Box>
-                    <Box px={4} h="40px" w="100%">
-                      <Flex
-                        alignItems="center"
-                        fontSize="400"
-                        w="100%"
-                        h="100%"
-                        color="romanSilver.base"
-                      >
-                        <Box mr={3}>
-                          <CupIcon color="gold.base" mr={1} fontSize="1.4em" />
-                        </Box>
-                        <GLink to="/profile/rustambaku13">
-                          <Link>zulfugarverdiyev</Link>
-                        </GLink>
-                        <Text
-                          as="span"
-                          ml="auto"
-                          fontSize="400"
-                          fontWeight="500"
-                          color="black"
-                        >
-                          3
-                        </Text>
-                      </Flex>
-                    </Box>
-                  </Box>
+                  <MiniLeaderBoard
+                    borderWidth="1px"
+                    bg="white"
+                    boxShadow="elevation_6"
+                    w="100%"
+                  />
                 </Box>
               </Flex>
             </Tabs>
