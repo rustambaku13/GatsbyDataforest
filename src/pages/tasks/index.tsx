@@ -165,7 +165,7 @@ const IndexPage = () => {
 const IndexRouter = () => {
   return (
     <Router basepath="/tasks">
-      <SpecificTaskPage path="/:taskId" />
+      <SpecificTaskPage path="/:taskId/" />
       <IndexPage default />
     </Router>
   );
