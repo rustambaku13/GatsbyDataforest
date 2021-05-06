@@ -38,7 +38,7 @@ export default {
     sm: {
       container: {
         px: 2,
-        py: 1,
+        py: 2,
         fontSize: 500,
         borderRadius: "base",
       },

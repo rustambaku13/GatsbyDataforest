@@ -100,6 +100,16 @@ export default {
         bg: "charlestonGreen.dark",
       },
     },
+    success: {
+      bg: "success.base",
+      color: "white",
+      border: "none",
+    },
+    error: {
+      bg: "danger.base",
+      color: "white",
+      border: "none",
+    },
   },
   // default values for `size` and `variant`
   defaultProps: {

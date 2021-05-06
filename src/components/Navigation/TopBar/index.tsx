@@ -23,6 +23,7 @@ export const TopBar = () => {
       align="center"
       boxShadow="top_nav"
       h="80px"
+      w="100%"
       bg="white"
       as="header"
     >

@@ -19,6 +19,7 @@ import { Router } from "@reach/router";
 import React, { useState } from "react";
 import { MiniLeaderBoard } from "../../components/Cards/Leaderboard/MiniLeaderboardCard";
 import { PublicTask } from "../../components/Cards/Task/PublicTask";
+import { LinkOverlay } from "../../components/Misc/LinkOverlay";
 import { SideNav } from "../../components/Navigation/SideNav";
 import { TopBar } from "../../components/Navigation/TopBar";
 import { dummy_tasks } from "../../dataSource/tasks";
@@ -46,13 +47,14 @@ const IndexPage = () => {
               >
                 Tasks
               </Heading>
+
               <Button
                 leftIcon={<PlusIcon fontSize="300" />}
                 ml="auto"
                 size="sm"
                 variant="persianGreen"
               >
-                Create Task
+                <LinkOverlay to="/create-task">Create Task</LinkOverlay>
               </Button>
             </Flex>
             <Tabs>

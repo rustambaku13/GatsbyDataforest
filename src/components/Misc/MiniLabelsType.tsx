@@ -1,8 +1,8 @@
 import { Center, chakra, Image } from "@chakra-ui/react";
 import React from "react";
 import annotation from "../../icons/annotation.svg";
-import date from "../../icons/date.svg";
 import boolean from "../../icons/boolean.svg";
+import date from "../../icons/date.svg";
 import text from "../../icons/text.svg";
 import { Label } from "../../types/label";
 const LABEL_TYPE_ICON_MAPPER = {

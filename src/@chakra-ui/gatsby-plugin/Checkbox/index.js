@@ -31,6 +31,26 @@ export default {
         },
       },
     },
+    circle: {
+      control: {
+        bg: "white",
+        borderColor: "babyBlueEyes.dark",
+        borderRadius: "50%",
+        color: "babyBlueEyes.dark",
+        _hover: {
+          borderColor: "babyBlueEues.dark",
+        },
+        _checked: {
+          color: "babyBlueEyes.dark",
+          bg: "white",
+          borderColor: "babyBlueEues.dark",
+          _hover: {
+            bg: "white",
+            borderColor: "babyBlueEues.dark",
+          },
+        },
+      },
+    },
   },
   sizes: {
     md: {

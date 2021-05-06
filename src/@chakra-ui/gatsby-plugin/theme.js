@@ -13,9 +13,11 @@ import Text from "./Text";
 import Tabs from "./Tabs";
 import space from "./space";
 import Menu from "./Menu";
+import Select from "./Select";
 import Tag from "./Tags";
 import Badge from "./Badge";
 import Modal from "./Modal";
+import Textarea from "./Textarea";
 const theme = {
   colors,
   fontSizes,
@@ -36,7 +38,9 @@ const theme = {
     Modal,
     Menu,
     Button,
+    Select,
     Input,
+    Textarea,
     Checkbox,
     Badge,
     Text,

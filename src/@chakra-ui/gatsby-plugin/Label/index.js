@@ -1,4 +1,8 @@
 export default {
+  baseStyle: {
+    fontWeight: 500,
+    fontSize: 400,
+  },
   variants: {
     hanging: {
       pos: "absolute",

@@ -35,16 +35,16 @@
 /* ==========================================================================
    OVERRIDING DEFAULT STYLES
    ========================================================================== */
-input:focus ~ label,
-input:valid ~ label {
-  top: 0;
-  left: 0.5rem;
-  z-index: 2;
-  background-color: white;
-  font-size: 0.75rem;
-  color: #535283;
-  padding: 2px 4px;
-}
+// input:focus ~ label,
+// input:valid ~ label {
+//   top: 0;
+//   left: 0.5rem;
+//   z-index: 2;
+//   background-color: white;
+//   font-size: 0.75rem;
+//   color: #535283;
+//   padding: 2px 4px;
+// }
 
 /* ==========================================================================
    SMALL COMPONENTS
@@ -97,5 +97,37 @@ input:valid ~ label {
       color-stop(0.5, transparent),
       to(transparent)
     );
+  }
+}
+.link-overlay {
+  position: static !important;
+
+  &:before {
+    content: "";
+    cursor: inherit;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+.add-task-sidebar {
+  .item {
+  }
+  .children {
+  }
+  .done {
+    // Finished
+    font-weight: 500;
+  }
+  .pending {
+    // To be worked
+  }
+  .working {
+    //Currently editing
+    font-weight: 500;
   }
 }

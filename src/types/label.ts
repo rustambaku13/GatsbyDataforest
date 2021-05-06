@@ -11,6 +11,7 @@ export interface Label {
 
 export interface TaskLabel extends Label {
   cardinality?: "S" | "M";
+  attendancy?: "M" | "O";
   render?: any;
   choices?: any[];
 }

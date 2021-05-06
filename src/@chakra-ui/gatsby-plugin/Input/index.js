@@ -5,9 +5,8 @@ export default {
       fontWeight: "500",
       borderRadius: "base",
       zIndex: 1,
-
       _placeholder: {
-        color: "text.light",
+        color: "text.disabled",
         fontWeight: "500",
       },
     },
@@ -20,6 +19,10 @@ export default {
         _focus: {
           boxShadow: "none",
           borderColor: "text.dark",
+        },
+        _placeholder: {
+          color: "text.disabled",
+          fontWeight: "500",
         },
       },
     },

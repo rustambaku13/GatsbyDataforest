@@ -10,3 +10,6 @@ export const ChevronDownIcon = (props) => (
     />
   </Icon>
 );
+export const ChevronRightIcon = (props) => (
+  <ChevronDownIcon transform="rotate(-90deg)" {...props} />
+);
