@@ -67,15 +67,18 @@ export const PublicTask = chakra(
               <Text variant="secondary" as="label">
                 Complexity
               </Text>
-              <Text textTransform="capitalize" variant={task.complexity}>
-                {task.complexity}
+              <Text
+                textTransform="capitalize"
+                variant={task.complexity || "medium"}
+              >
+                {task.complexity || "medium"}
               </Text>
             </Box>{" "}
             <Box>
               <Text variant="secondary" as="label">
                 Labels
               </Text>
-              <Text color="black">{task.labels.length}</Text>
+              <Text color="black">{10}</Text>
             </Box>
             <Box>
               <Text variant="secondary" as="label">
@@ -88,21 +91,21 @@ export const PublicTask = chakra(
                 Task Type
               </Text>
               <Text textTransform="capitalize" color="black">
-                {task.type}
+                {task.type || "image"}
               </Text>
             </Box>
             <Box>
               <Text variant="secondary" as="label">
                 Dimensions(px)
               </Text>
-              <Text color="black">{`${task.width}x${task.height}`}</Text>
+              <Text color="black">{`${task.shape_x}x${task.shape_y}`}</Text>
             </Box>
             <Box>
               <Text variant="secondary" as="label">
                 Expiration date
               </Text>
               <Text color="black">
-                {moment(task.deadline).format("DD.MM.YYYY")}
+                {/* {moment(task.deadline).format("DD.MM.YYYY")} */}
               </Text>
             </Box>
           </SimpleGrid>

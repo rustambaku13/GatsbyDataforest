@@ -15,6 +15,7 @@ import React, { useState } from "react";
 import { NotificationIcon } from "../../../icons/jsx/notification";
 import { ChevronDownIcon } from "../../../icons/jsx/chevrondown";
 import { SearchIcon } from "../../../icons/jsx/search";
+import UserStore from "../../../store/UserStore";
 export const TopBar = () => {
   const [open, setOpen] = useState(false);
   return (
@@ -80,7 +81,13 @@ export const TopBar = () => {
               <MenuItem>Datasets</MenuItem>
               <MenuDivider />
 
-              <MenuItem>Log Out</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  UserStore.logout();
+                }}
+              >
+                Log Out
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>

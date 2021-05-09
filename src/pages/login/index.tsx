@@ -18,9 +18,29 @@ import {
 import { Link as GLink } from "gatsby";
 import * as React from "react";
 import dataforest from "../../images/LogoText.svg";
+import { useForm } from "react-hook-form";
 import github from "../../icons/Github.svg";
 import google from "../../icons/Google.svg";
-const IndexPage = () => {
+import UserStore from "../../store/UserStore";
+import { flowResult } from "mobx";
+import { observer } from "mobx-react-lite";
+import { useAuthRedirect } from "../../helpers/useAuthOnly";
+const IndexPage = observer(() => {
+  const [loading, setLoading] = React.useState(false);
+  const { register, formState, handleSubmit, setError } = useForm();
+  useAuthRedirect({ to: "/tasks" });
+  const submitHandler = (credentials) => {
+    setLoading(true);
+    flowResult(UserStore.login(credentials))
+      .then((e) => {})
+      .catch((e) => {
+        const msg = e.response.data.message || "Error has occured";
+        setError("global", msg);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   return (
     <>
       <Center p={3} bg="blueberryBlue.light" minH="100vh" minW="100%">
@@ -54,18 +74,51 @@ const IndexPage = () => {
             >
               Sign In
             </Heading>
-            <VStack spacing={8} w="100%" as="form">
+            <VStack
+              onSubmit={handleSubmit(submitHandler)}
+              spacing={8}
+              w="100%"
+              as="form"
+            >
               <FormControl id="email">
-                <Input required size="lg" type="email" />
-                <FormLabel>E-mail address</FormLabel>
+                <FormLabel variant="">Email</FormLabel>
+                <Input
+                  {...register("email", {
+                    required: "Enter your email address",
+                  })}
+                  required
+                  size="lg"
+                  type="email"
+                  placeholder="Email"
+                />
+                {/* <FormLabel>E-mail address</FormLabel> */}
+                <Text fontSize="300" color="danger.base">
+                  {formState.errors.email?.message}
+                </Text>
               </FormControl>
               <FormControl id="password">
-                <Input required size="lg" type="password" />
-                <FormLabel>Password</FormLabel>
+                <FormLabel variant="">Password</FormLabel>
+                <Input
+                  {...register("password", {
+                    required: "Enter your password",
+                  })}
+                  required
+                  placeholder="Password"
+                  size="lg"
+                  type="password"
+                />
+                {/* <FormLabel>Password</FormLabel> */}
+                <Text fontSize="300" color="danger.base">
+                  {formState.errors.password?.message}
+                </Text>
+                <Text fontSize="300" color="danger.base">
+                  {formState.errors.global?.message}
+                </Text>
               </FormControl>
 
               <VStack mb={8} w="100%" spacing={4}>
                 <Button
+                  isLoading={loading}
                   type="submit"
                   fontWeight="500"
                   size="lg"
@@ -76,7 +129,8 @@ const IndexPage = () => {
                 </Button>
                 <Button
                   leftIcon={<Image mr={4} src={google} />}
-                  type="submit"
+                  type="button"
+                  isLoading={loading}
                   size="lg"
                   w="100%"
                   variant="outline"
@@ -85,7 +139,8 @@ const IndexPage = () => {
                 </Button>
                 <Button
                   leftIcon={<Image mr={4} src={github} />}
-                  type="submit"
+                  type="button"
+                  isLoading={loading}
                   size="lg"
                   w="100%"
                   variant="black"
@@ -110,6 +165,6 @@ const IndexPage = () => {
       </Center>
     </>
   );
-};
+});
 
 export default IndexPage;

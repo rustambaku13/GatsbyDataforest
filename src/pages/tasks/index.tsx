@@ -16,12 +16,15 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Router } from "@reach/router";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { getTasks } from "../../api/tasks";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { MiniLeaderBoard } from "../../components/Cards/Leaderboard/MiniLeaderboardCard";
 import { PublicTask } from "../../components/Cards/Task/PublicTask";
 import { LinkOverlay } from "../../components/Misc/LinkOverlay";
 import { SideNav } from "../../components/Navigation/SideNav";
 import { TopBar } from "../../components/Navigation/TopBar";
+import { MiniPreloader } from "../../components/Preloaders/MiniPreloader";
 import { dummy_tasks } from "../../dataSource/tasks";
 import SpecificTaskPage from "../../dynamic/Task/SpecificTask";
 import { ChevronDownIcon } from "../../icons/jsx/chevrondown";
@@ -29,7 +32,23 @@ import { FilterIcon } from "../../icons/jsx/filter";
 import { PlusIcon } from "../../icons/jsx/plus";
 
 const IndexPage = () => {
-  const [tasks, setTasks] = useState("");
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const page = useRef(1);
+  const fetchTasks = () => {
+    setLoading(true);
+    getTasks({ page: page.current })
+      .then(({ data }) => {
+        setTasks([...tasks, ...data.data]);
+        page.current++;
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+  useEffect(() => {
+    fetchTasks();
+  }, []);
   return (
     <>
       <SideNav />
@@ -140,13 +159,21 @@ const IndexPage = () => {
                 <Tag variant="dataforest-button">Cats</Tag>
                 <Tag variant="dataforest-button">Data Analysis</Tag>
               </HStack>
-              <Flex mt={6} w="100%">
+              <Flex pb={5} mt={6} w="100%">
                 <Box mr={5} flex={1}>
-                  <VStack spacing={4}>
-                    {dummy_tasks.results.map((task) => (
-                      <PublicTask task={task} />
-                    ))}
-                  </VStack>
+                  <InfiniteScroll
+                    loader={null}
+                    dataLength={tasks.length}
+                    next={fetchTasks}
+                    hasMore={true}
+                  >
+                    <VStack spacing={4}>
+                      {tasks.map((task) => (
+                        <PublicTask task={task} />
+                      ))}
+                      {loading ? <MiniPreloader /> : null}
+                    </VStack>
+                  </InfiniteScroll>
                 </Box>
                 <Box flex="0 0 240px">
                   <MiniLeaderBoard

@@ -32,6 +32,8 @@ import { CrossIcon } from "../../icons/jsx/cross";
 import { LabelInput } from "../../components/Form/Labelnput";
 import { navigate } from "gatsby-link";
 import { createTask } from "../../api/tasks";
+import { useAnonRedirect } from "../../helpers/useAuthOnly";
+import { observer } from "mobx-react-lite";
 
 const FIELDS = [
   ["task_type", "title", "description", "tags"],
@@ -171,10 +173,12 @@ const PaymentForm = () => {
   );
 };
 
-const CreateTaskPage = () => {
+const CreateTaskPage = observer(() => {
   const [index, setIndex] = useState(0);
   const methods = useForm();
+  const [loading, setLoading] = useState(false);
   const { register, trigger, handleSubmit, getValues, formState } = methods;
+  useAnonRedirect({ to: "/tasks" });
   const previous = (e) => {
     e.preventDefault();
     setIndex((index) => index - 1);
@@ -193,12 +197,16 @@ const CreateTaskPage = () => {
     }
   };
   const onSubmit = (data) => {
+    setLoading(true);
     createTask(data)
       .then((e) => {
-        console.log(e);
+        navigate("/tasks");
       })
       .catch((e) => {
         console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
   return (
@@ -427,6 +435,7 @@ const CreateTaskPage = () => {
                     </Button>
                     <Button
                       onClick={next}
+                      isLoading={loading}
                       type="submit"
                       variant="babyBlue"
                       size="sm"
@@ -443,6 +452,6 @@ const CreateTaskPage = () => {
       </Flex>
     </>
   );
-};
+});
 
 export default CreateTaskPage;

@@ -16,10 +16,29 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Link as GLink } from "gatsby";
+import { flowResult } from "mobx";
+import { observer } from "mobx-react-lite";
 import * as React from "react";
+import { useForm } from "react-hook-form";
+import { useAuthRedirect } from "../../helpers/useAuthOnly";
 import dataforest from "../../images/LogoText.svg";
-
-const IndexPage = () => {
+import UserStore from "../../store/UserStore";
+const IndexPage = observer(() => {
+  const { register, formState, handleSubmit, setError, getValues } = useForm();
+  const [loading, setLoading] = React.useState(false);
+  const [accepted, setAccepted] = React.useState(false);
+  useAuthRedirect({ to: "/tasks" });
+  const submitHandler = (credentials) => {
+    setLoading(true);
+    flowResult(UserStore.signUp(credentials))
+      .then(() => {
+        alert("SUCCESSS");
+      })
+      .catch((err) => {})
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   return (
     <>
       <Center p={3} bg="blueberryBlue.light" minH="100vh" minW="100%">
@@ -53,32 +72,109 @@ const IndexPage = () => {
             >
               Sign Up
             </Heading>
-            <VStack spacing={8} w="100%" as="form">
+            <VStack
+              onSubmit={handleSubmit(submitHandler)}
+              spacing={8}
+              w="100%"
+              as="form"
+            >
               <HStack spacing={8}>
-                <FormControl id="first_name">
-                  <Input required size="lg" type="text" />
-                  <FormLabel>First Name</FormLabel>
+                <FormControl id="fname">
+                  <FormLabel variant="">First Name</FormLabel>
+                  <Input
+                    {...register("fname", {
+                      required: "First Name",
+                    })}
+                    placeholder="First Name"
+                    required
+                    size="lg"
+                    type="text"
+                  />
+                  <Text fontSize="300" color="danger.base">
+                    {formState.errors.fname?.message}
+                  </Text>
                 </FormControl>
-                <FormControl id="last_name">
-                  <Input required size="lg" type="text" />
-                  <FormLabel>Last Name</FormLabel>
+                <FormControl id="lname">
+                  <FormLabel variant="">Last Name</FormLabel>
+                  <Input
+                    {...register("lname", {
+                      required: "Last Name",
+                    })}
+                    placeholder="Last Name"
+                    required
+                    size="lg"
+                    type="text"
+                  />
                 </FormControl>
+                <Text fontSize="300" color="danger.base">
+                  {formState.errors.lname?.message}
+                </Text>
               </HStack>
               <FormControl id="email">
-                <Input required size="lg" type="email" />
-                <FormLabel>Email address</FormLabel>
+                <FormLabel variant="">Email address</FormLabel>
+                <Input
+                  {...register("email", {
+                    required: "Enter your email address",
+                  })}
+                  required
+                  size="lg"
+                  type="email"
+                  placeholder="Email"
+                />
+                <Text fontSize="300" color="danger.base">
+                  {formState.errors.email?.message}
+                </Text>
               </FormControl>
               <FormControl id="password">
-                <Input required size="lg" type="password" />
-                <FormLabel>Password</FormLabel>
+                <FormLabel variant="">Password</FormLabel>
+                <Input
+                  {...register("password", {
+                    required: "Enter your password",
+                  })}
+                  required
+                  placeholder="Password"
+                  size="lg"
+                  type="password"
+                />
+                {/* <FormLabel>Password</FormLabel> */}
+                <Text fontSize="300" color="danger.base">
+                  {formState.errors.password?.message}
+                </Text>
+                <Text fontSize="300" color="danger.base">
+                  {formState.errors.global?.message}
+                </Text>
               </FormControl>
-              <FormControl id="repeat_password">
-                <Input required size="lg" type="password" />
-                <FormLabel>Repeat Password</FormLabel>
+              <FormControl id="password">
+                <FormLabel variant="">Repeat Password</FormLabel>
+                <Input
+                  {...register("re_password", {
+                    required: "Repeat your password",
+                    validate: (data) =>
+                      getValues("password") == data || "Password do not match",
+                  })}
+                  required
+                  placeholder="Password"
+                  size="lg"
+                  type="password"
+                />
+                <Text fontSize="300" color="danger.base">
+                  {formState.errors.re_password?.message}
+                </Text>
+                <Text fontSize="300" color="danger.base">
+                  {formState.errors.global?.message}
+                </Text>
               </FormControl>
 
               <Flex w="100%">
-                <Checkbox variant="dark" mb="1px" size="md" mr={2}></Checkbox>
+                <Checkbox
+                  onChange={(e) => {
+                    setAccepted(e.target.checked);
+                  }}
+                  variant="dark"
+                  mb="1px"
+                  size="md"
+                  mr={2}
+                ></Checkbox>
                 <Text
                   d="inline-block"
                   color="romanSilver.base"
@@ -94,8 +190,10 @@ const IndexPage = () => {
                 </Text>
               </Flex>
               <Button
+                isDisabled={!accepted}
                 mb={8}
                 type="submit"
+                isLoading={loading}
                 size="lg"
                 w="100%"
                 fontWeight="500"
@@ -109,6 +207,6 @@ const IndexPage = () => {
       </Center>
     </>
   );
-};
+});
 
 export default IndexPage;
