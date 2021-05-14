@@ -20,7 +20,7 @@ import { SideNav } from "../../components/Navigation/SideNav";
 import { SubmissionCard } from "../../components/Cards/Data/SubmissionCard";
 import { TopBar } from "../../components/Navigation/TopBar";
 import React, { useEffect, useState } from "react";
-import { getTask } from "../../api/tasks";
+import { getTask, getTaskSubmissions } from "../../api/tasks";
 import { BigPublicTask } from "../../components/Cards/Task/BigPublicTask";
 import { dummy_submissions } from "../../dataSource/submissions";
 import { range } from "../../helpers/misc";
@@ -32,19 +32,25 @@ import { GridIcon } from "../../icons/jsx/grid";
 import { ListIcon } from "../../icons/jsx/list";
 import { SelectAllIcon } from "../../icons/jsx/selectall";
 import { abbreviate } from "../../helpers/abbreviate";
-const SpecificTaskPage = ({ taskId }) => {
-  const [task, setTask] = useState(null);
+import { Task } from "../../types/task";
+const PublicSpecificTask = ({ task }:{task:Task}) => {
+ 
+ 
+  const [submissionsLoading,setSubmissionsLoading] = useState(true)
+  const [submissions,setSubmission] = useState([])
   const [selectedData, setSelectedData] = useState([]);
   const [selectable, setSelectable] = useState(false);
+  const fetchTaskSubmission = ()=>{
+    setSubmissionsLoading(true)
+    getTaskSubmissions({taskId:task._id.$oid}).then(({data})=>{
+      console.log(data);
+    }).catch(()=>{
 
-  useEffect(() => {
-    getTask({ taskId })
-      .then((task) => {
-        setTask(task);
-      })
-      .catch(() => {})
-      .finally(() => {});
-  }, []);
+    }).finally(()=>{  
+      setSubmissionsLoading(false)
+    })
+  }
+  useEffect(fetchTaskSubmission,[task])
   return (
     <>
       <SideNav />
@@ -203,7 +209,7 @@ const SpecificTaskPage = ({ taskId }) => {
                         }}
                         value={selectedData}
                       >
-                        {dummy_submissions.map((data, index) => {
+                        {submissions.map((data, index) => {
                           return (
                             <Flex px={4} borderBottomWidth="1px">
                               <Checkbox
@@ -370,4 +376,19 @@ const SpecificTaskPage = ({ taskId }) => {
   );
 };
 
+const SpecificTaskPage =  ({taskId})=>{
+
+  const [task,setTask] = useState(null)
+  useEffect(() => {
+    getTask({ taskId })
+      .then(({data}) => {
+        setTask(data);
+      })
+      .catch(() => {})
+      .finally(() => {});
+  }, []);
+
+  if(!task)return null
+  return <PublicSpecificTask task={task}/>
+}
 export default SpecificTaskPage;

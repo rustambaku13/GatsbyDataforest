@@ -1,6 +1,6 @@
 import { loginUser, signUpUser } from "./../api/user";
 import { flowResult, makeAutoObservable } from "mobx";
-import { ms_auth } from "../api";
+import { ms_auth, ms_main } from "../api";
 import Cookies from "js-cookie";
 /*
   ================================================
@@ -35,7 +35,7 @@ class UserStore {
     this.token = null;
     this.me = null;
 
-    delete ms_auth.defaults.headers["Authorization"];
+    delete ms_main.defaults.headers["Authorization"];
   }
 
   *signUp(props: {
@@ -55,7 +55,7 @@ class UserStore {
   *login_cookie(token) {
     try {
       this.token = token;
-      ms_auth.defaults.headers["Authorization"] = `Token ${token}`;
+      ms_main.defaults.headers["Authorization"] = `Token ${token}`;
 
       this.me = {};
     } catch (err) {
@@ -66,7 +66,7 @@ class UserStore {
     const { data } = yield loginUser(credentials);
     this.token = data.token;
     this.me = data.user;
-    ms_auth.defaults.headers["Authorization"] = `Bearer ${data.token}`;
+    ms_main.defaults.headers["Authorization"] = `Bearer ${data.token}`;
     Cookies.set("token", data);
     return data;
   }

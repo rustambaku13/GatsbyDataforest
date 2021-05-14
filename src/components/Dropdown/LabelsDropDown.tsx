@@ -49,7 +49,7 @@ export const LabelsDropDown = chakra(
           pos="relative"
           display="none"
         >
-          <LabelTreeCore labels={task.labels} Element={LabelTreeItem} />
+          <LabelTreeCore labels={task.labels || []} Element={LabelTreeItem} />
         </Box>
       </Box>
     );

@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { useLabelingTool } from "../../../hooks/useLabelingTool";
 import LabelingStore from "../../../store/LabelingStore";
 import { NumberInputToolModal } from "../Tools/NumberInputTool";
+import { TextInputToolModal } from "../Tools/TextInputTool";
 
 /**
  * Canvas is defining the view for canvas element and uses the useLabelingTool hook that contorls everything
@@ -16,6 +17,7 @@ export const Canvas = observer(() => {
   return (
     <>
       <NumberInputToolModal />
+      <TextInputToolModal/>
       <Box w="calc(100% - 600px )" pos="relative" zIndex={0} h="100%">
         <Text pos="absolute" zIndex={2} color="danger.base" textAlign="center">
           {LabelingStore.activeTool}

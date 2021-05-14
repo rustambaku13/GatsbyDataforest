@@ -99,8 +99,8 @@ export const BigPublicTask = chakra(
             <Text variant="secondary" as="label">
               Complexity
             </Text>
-            <Text mt={1} textTransform="capitalize" variant={task.complexity}>
-              {task.complexity}
+            <Text mt={1} textTransform="capitalize" variant={task.complexity || "medium"}>
+              {task.complexity || "medium"}
             </Text>
           </Box>{" "}
           <Box>
@@ -117,14 +117,14 @@ export const BigPublicTask = chakra(
               Task Type
             </Text>
             <Text mt={1} textTransform="capitalize" color="black">
-              {task.type}
+              {task.type || "Image"}
             </Text>
           </Box>{" "}
           <Box>
             <Text variant="secondary" as="label">
               Dimensions(px)
             </Text>
-            <Text mt={1} color="black">{`${task.width}x${task.height}`}</Text>
+            <Text mt={1} color="black">{`${task.shape_x}x${task.shape_y}`}</Text>
           </Box>{" "}
           <Box>
             <Text variant="secondary" as="label">

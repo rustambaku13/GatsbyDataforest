@@ -57,10 +57,11 @@ export const LabelTree = chakra(
     labels: Label[];
     element?: any;
   }) => {
+    
     return (
       <Box w="100%" className={className + " label-dropdown"}>
         <Box fontSize="400" role="menu" as="ul" w="100%" pos="relative">
-          <LabelTreeCore labels={labels} Element={element} />
+          <LabelTreeCore labels={labels || []} Element={element} />
         </Box>
       </Box>
     );

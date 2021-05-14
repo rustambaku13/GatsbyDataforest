@@ -1,3 +1,4 @@
+import { addSubmission } from './../api/tasks';
 import {
   autorun,
   isObservableProp,
@@ -8,15 +9,16 @@ import {
 import paper from "paper/dist/paper-core";
 import { DataLabel } from "../classes/DataLabel";
 import { Task } from "../classes/Task";
+import {Task as TaskType} from "../types/task"
 import { TaskLabel } from "../classes/TaskLabel";
 import { normalinteractionTool } from "../dynamic/LabelingTool/Tools/normalInteractionTool";
 import { rectangeAnnotationTool } from "../dynamic/LabelingTool/Tools/rectangleAnnotationTool";
 
 const isBrowser = typeof window !== "undefined";
 type ANNOTATION_STATE = "SELECT_DATA" | "SELECT_LABEL" | "SELECT_DATA_LABEL";
-type ANNOTATION_TOOLS = "rect" | "norm" | "number";
+type ANNOTATION_TOOLS = "rect" | "norm" | "number" | "text";
 export class LabelingStore {
-  data: File[] = []; // Date that we are working on
+  data: File[] = []; // data that we are working on
   task: Task = null; // Task that is to be submitted
   dataLabels: DataLabel[][] = []; // Labels of the Data
 
@@ -39,6 +41,7 @@ export class LabelingStore {
   addDataLabel(label: any) {
     const dataLabel = new DataLabel(this.selectedTaskLabel);
     dataLabel.parent = this.selectedDataLabel;
+    dataLabel.raster = paper.project.activeLayer.firstChild;
     dataLabel.store = this;
     dataLabel.element = label;
     if (label instanceof paper.Item) label.data.element = dataLabel;
@@ -77,8 +80,18 @@ export class LabelingStore {
     paper.project.layers[this.selectedData].activate();
     paper.project.layers[this.selectedData].visible = true;
   }
-  set selectTask(task: Task) {
-    this.task = task;
+  set selectTask(task: TaskType) {
+    this.task = new Task(task);
+  }
+  // Submit The Item that we are working on right now
+  *submitCurrentlyWorking(){
+      const formData = new FormData()
+      const lables =  JSON.stringify(this.dataLabels[this.selectedData].map(item=>item.toJSON()))
+      const metadata = JSON.stringify({})
+      formData.append("file", this.data[this.selectedData], this.data[this.selectedData].name)
+      formData.append('metadata',metadata)
+      formData.append("labels",lables)
+      yield addSubmission(this.task.id,formData)
   }
 }
 
@@ -101,6 +114,8 @@ const toolPicker = (): ANNOTATION_TOOLS => {
   switch (taskLabel.label_type) {
     case "number":
       return "number";
+    case "text":
+      return "text";
     default:
       return "norm";
   }

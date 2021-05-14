@@ -25,7 +25,7 @@ export const PublicTask = chakra(
         py="20px"
         w="100%"
         onClick={() => {
-          navigate(`/tasks/${task.id}`);
+          navigate(`/tasks/${task._id.$oid}`);
         }}
         px={6}
         bg="white"

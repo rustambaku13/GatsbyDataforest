@@ -2,7 +2,9 @@ import { TaskLabel } from "./label";
 
 export interface Task {
   title: string;
-  id: string;
+  _id:{
+    $oid:string
+  }
   deadline: Date;
   labels: TaskLabel[];
   description: string;
@@ -14,8 +16,8 @@ export interface Task {
   price: number;
   price_per_datum: number;
   type: "image" | "video" | "text";
-  width: number;
-  height: number;
+  shape_x: number;
+  shape_y: number;
   extension: "jpg" | "png" | "tiff";
   image_type: "rgb" | "grayscale" | "B&W";
   complexity: "easy" | "medium" | "hard";

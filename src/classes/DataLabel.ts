@@ -6,8 +6,10 @@ export class DataLabel {
   description: string;
   is_annotation: boolean;
   taskLabelName: string;
+  taskLabel:TaskLabel
   parent: DataLabel;
   element: paper.Item;
+  raster?: paper.Item
   label_type: string;
   children: DataLabel[] = [];
   store: LabelingStore;
@@ -23,6 +25,7 @@ export class DataLabel {
     this.description = taskLabel.description;
     this.is_annotation = taskLabel.is_annotation;
     this.taskLabelName = taskLabel.name;
+    this.taskLabel = taskLabel
     this.label_type = taskLabel.label_type;
 
     makeAutoObservable(this, {
@@ -48,5 +51,38 @@ export class DataLabel {
       ].filter((label: DataLabel) => label != this);
     }
     this.store.selectDataLabel = null;
+  }
+  getBounds(){
+    const rect = this.element.children[1]
+    const topLeft = rect.bounds.topLeft.subtract(this.raster.bounds.topLeft)
+    const width = rect.bounds.width
+    const height = rect.bounds.height
+    return {
+      topLeft:{x:topLeft.x,y:topLeft.y},
+      width,
+      height
+    }
+  }
+  toJSON(){
+    const children = this.children.map(item=>item.toJSON()) // Recursive Match
+    let data = {
+      name:this.name,
+      description:this.description,
+      is_annotation:this.is_annotation,
+      taskLabelName:this.taskLabelName,
+      label_type:this.label_type,
+      children,
+      value:null
+    }
+    if( this.element instanceof paper.Item){
+      // Populate value as the coordinates relative to image Raster
+      data.value = this.getBounds()
+    }
+    else{
+      // Populate Value as the real value 
+      data.value = this.element
+    }
+    return data
+  
   }
 }
