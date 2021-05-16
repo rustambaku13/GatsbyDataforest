@@ -15,8 +15,8 @@ import { normalinteractionTool } from "../dynamic/LabelingTool/Tools/normalInter
 import { rectangeAnnotationTool } from "../dynamic/LabelingTool/Tools/rectangleAnnotationTool";
 
 const isBrowser = typeof window !== "undefined";
-type ANNOTATION_STATE = "SELECT_DATA" | "SELECT_LABEL" | "SELECT_DATA_LABEL";
-type ANNOTATION_TOOLS = "rect" | "norm" | "number" | "text";
+type TOOL_STATE = "SELECT_DATA" | "SELECT_LABEL" | "SELECT_DATA_LABEL" | "LABELING" | "ADDING";
+type ANNOTATION_TOOLS = "rect" | "norm" | "number" | "text" | "boolean";
 export class LabelingStore {
   data: File[] = []; // data that we are working on
   task: Task = null; // Task that is to be submitted
@@ -27,7 +27,7 @@ export class LabelingStore {
   selectedDataLabel: DataLabel = null; // Data Label that is selected
 
   activeTool: ANNOTATION_TOOLS = "norm"; // Active Tool that is cuurently active
-  state: ANNOTATION_STATE = "SELECT_DATA";
+  state: TOOL_STATE = "SELECT_DATA";
   constructor() {
     makeAutoObservable(this, {
       selectedTaskLabel: observable.shallow,
@@ -53,6 +53,8 @@ export class LabelingStore {
     this.dataLabels[this.selectedData] = [
       ...this.dataLabels[this.selectedData],
     ];
+    // Remove Selected Data Label
+    this.selectDataLabel = null
   }
 
   uploadData(data) {
@@ -77,21 +79,42 @@ export class LabelingStore {
     // Select a data in left panel to work on
     this.selectedData = index;
     paper.project.activeLayer.visible = false;
+    if(index==null)return
     paper.project.layers[this.selectedData].activate();
     paper.project.layers[this.selectedData].visible = true;
   }
   set selectTask(task: TaskType) {
     this.task = new Task(task);
   }
+  // Removes everything about the given index item in the labeling tool
+  removeItem(index:number){
+    this.data.splice(index,1)
+    this.dataLabels[index].forEach(item=>item.delete())
+    this.dataLabels.splice(index,1)
+    this.selectData=this.data.length?0:null
+    this.selectTaskLabel = null
+    this.selectDataLabel = null
+    paper.project.activeLayer.remove()
+    paper.project.layers?.[this.selectedData]?.activate()
+  }
+  resetAll(){
+    while(this.data.length){
+      this.removeItem(0)
+    }
+    this.task = null
+
+  }
   // Submit The Item that we are working on right now
   *submitCurrentlyWorking(){
+      const file = this.data[this.selectedData]
       const formData = new FormData()
       const lables =  JSON.stringify(this.dataLabels[this.selectedData].map(item=>item.toJSON()))
-      const metadata = JSON.stringify({})
-      formData.append("file", this.data[this.selectedData], this.data[this.selectedData].name)
+      const metadata = JSON.stringify({name:file.name})
+      formData.append("file", file, file.name)
       formData.append('metadata',metadata)
       formData.append("labels",lables)
       yield addSubmission(this.task.id,formData)
+      this.removeItem(this.selectedData)
   }
 }
 
@@ -116,27 +139,33 @@ const toolPicker = (): ANNOTATION_TOOLS => {
       return "number";
     case "text":
       return "text";
+    case "boolean":
+      return "boolean"
     default:
       return "norm";
   }
 };
 autorun(() => {
   if (store.selectedTaskLabel && !store.selectedDataLabel) {
-    if (store.selectedTaskLabel.parent) store.activeTool = "norm";
-    else store.activeTool = toolPicker();
+    if (store.selectedTaskLabel.parent) {store.activeTool = "norm";store.state='SELECT_DATA_LABEL'}
+    else {store.activeTool = toolPicker();store.state="LABELING"}
   } else if (store.selectedTaskLabel && store.selectedDataLabel) {
     if (
       store.selectedTaskLabel.parent?.name ==
       store.selectedDataLabel.taskLabelName
     ) {
       store.activeTool = toolPicker();
+      store.state="LABELING"
     } else {
       store.activeTool = "norm";
+      store.state="SELECT_DATA_LABEL"
     }
   } else if (!store.selectedTaskLabel && store.selectedDataLabel) {
     store.activeTool = "norm";
+    store.state="SELECT_LABEL"
   } else {
     store.activeTool = "norm";
+    store.state="SELECT_LABEL"
   }
 });
 /**

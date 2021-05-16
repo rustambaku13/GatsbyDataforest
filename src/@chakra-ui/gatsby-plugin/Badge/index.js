@@ -12,12 +12,12 @@ export default {
       color: "success.dark",
     },
     rejected: {
-      bg: "warning.light",
-      color: "warning.dark",
-    },
-    pending: {
       bg: "danger.light",
       color: "danger.dark",
+    },
+    pending: {
+      bg: "warning.light",
+      color: "warning.dark",
     },
   },
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -17,23 +17,27 @@ import {
   Box,
   Button,
   Input,
+  Checkbox,
+  Flex,
 } from "@chakra-ui/react";
 
 import LabelingStore from "../../../store/LabelingStore";
 import { useForm } from "react-hook-form";
-export const NumberInputToolModal = () => {
+export const BooleanInputToolModal = () => {
   const labelname = LabelingStore.selectedTaskLabel?.name;
   const { register, handleSubmit, setError, formState } = useForm();
   const { errors } = formState;
+  const [yes,setYes] = useState(false)
+  
   const onSubmit = ({ value }) => {
-    if (isNaN(value)) return setError("value", { message: "Number Input" });
-    LabelingStore.addDataLabel(value);
+    
+    LabelingStore.addDataLabel(yes);
     LabelingStore.activeTool = "norm";
   };
 
   return (
     <Modal
-      isOpen={LabelingStore.activeTool == "number"}
+      isOpen={LabelingStore.activeTool == "boolean"}
       onClose={() => {
         LabelingStore.activeTool = "norm";
       }}
@@ -58,17 +62,17 @@ export const NumberInputToolModal = () => {
               {LabelingStore.selectedTaskLabel?.description}
             </Text>
             <Box mx="auto" maxW="200px" w="100%">
-              <Input
-                {...register("value", {
-                  required: "Value is required",
-                  valueAsNumber: true,
-                })}
-                name="value"
-                size="lg"
-                placeholder={`Please enter ${labelname}`}
-                max={30}
-                clampValueOnBlur={false}
-              ></Input>
+              <Flex justifyContent='center' mx='auto'>
+              <Checkbox isChecked={yes} onChange={e=>{setYes(e.target.checked)}} mr={3} 
+                size="lg" >
+                Yes
+              </Checkbox>
+              <Checkbox isChecked={!yes} onChange={e=>{setYes(!e.target.checked)}}
+                size="lg" >
+                No
+              </Checkbox>
+              
+              </Flex>
               <Text as="small" color="danger.base">
                 {errors.value?.message}
               </Text>

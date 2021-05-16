@@ -1,10 +1,12 @@
-import { Box, Button, Flex, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, VStack,useToast } from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 import LabelingStore from "../../../store/LabelingStore";
 import { LabelTree } from "../../../components/Tree/LabelTree";
 import { DataLabelsItem } from "../../../components/Tree/TreeItems/DataLabelItem";
 import { flowResult } from "mobx";
+import TOASTS from "../../../toasts";
+import { navigate } from "gatsby-link";
 
 /**
  * Label Displaer Part of the Canvas View
@@ -12,11 +14,16 @@ import { flowResult } from "mobx";
  */
 export const LabelsDisplayer = observer(() => {
   const [loading,setLoading] = useState(false)
-
+  const toast = useToast()
   const handleOneSubmission = ()=>{
     setLoading(true)
     flowResult(LabelingStore.submitCurrentlyWorking()).then(()=>{
-
+        toast(TOASTS("LABEL_ADDED"))
+        if(LabelingStore.data.length==0){
+          navigate(`/tasks/${LabelingStore.task.id}`)
+          LabelingStore.resetAll()
+          
+        }
     }).catch(()=>{
 
     }).finally(()=>{
@@ -41,7 +48,7 @@ export const LabelsDisplayer = observer(() => {
       <Text mb={2} color="black" fontWeight="500" fontSize="500">
         Task Labels
       </Text>
-      <LabelTree labels={LabelingStore.task.labels} />
+      <LabelTree labels={LabelingStore.task?.labels || []} />
       <Text mt={7} mb={2} color="black" fontWeight="500" fontSize="500">
         My Labels
       </Text>

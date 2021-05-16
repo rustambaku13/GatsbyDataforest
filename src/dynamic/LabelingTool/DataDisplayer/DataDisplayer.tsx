@@ -7,18 +7,26 @@ import {
   VStack,
   Divider,
 } from "@chakra-ui/react";
+import { navigate } from "gatsby-link";
+import { observer } from "mobx-react-lite";
 
 import React from "react";
 import { CrossIcon } from "../../../icons/jsx/cross";
 import { HamburgerMenu } from "../../../icons/jsx/hamburger";
 import LabelingStore from "../../../store/LabelingStore";
+import LayoutStore from "../../../store/LayoutStore";
 import { DataCard } from "./DataCard";
 
 /**
  * Data displayer part of the canvas. The very left side
  * @returns React.Element
  */
-export const DataDisplayer = () => {
+export const DataDisplayer = observer(() => {
+  const closeLabelingStore = async ()=>{
+    navigate(`/tasks/${LabelingStore.task.id}`)
+    LabelingStore.resetAll()
+    
+  }
   return (
     <Box
       borderRightWidth="1px"
@@ -39,6 +47,18 @@ export const DataDisplayer = () => {
           w="6"
           h="6"
           minW="unset"
+          onClick={()=>{
+            LayoutStore.alertModalOpen({
+              yes:"Yes",
+              no:"No",
+              callback:closeLabelingStore,
+              description:"All Unsumitted data will be lost",
+              title:"Are you sure to exit data upload",
+              type:"error"
+
+            })
+          }}
+
           icon={<CrossIcon />}
         />
         <Text
@@ -71,4 +91,4 @@ export const DataDisplayer = () => {
       </VStack>
     </Box>
   );
-};
+});

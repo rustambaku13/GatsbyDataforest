@@ -1,10 +1,16 @@
+import { DataLabel } from "./label";
+
 export interface MetaData {
   name: string;
 }
 
 export interface Submission {
-  data: { value: string };
+  owner:string,
+  submission:string
   state: "accepted" | "rejected" | "pending";
-  labels: any;
-  metaData: MetaData;
+  
+  metadata: MetaData;
+  datasets:string[],
+  labels:DataLabel[],
+  tasks:[any]
 }

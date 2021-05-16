@@ -178,7 +178,7 @@ const CreateTaskPage = observer(() => {
   const methods = useForm();
   const [loading, setLoading] = useState(false);
   const { register, trigger, handleSubmit, getValues, formState } = methods;
-  useAnonRedirect({ to: "/tasks" });
+  useAnonRedirect({ to: "/login" });
   const previous = (e) => {
     e.preventDefault();
     setIndex((index) => index - 1);

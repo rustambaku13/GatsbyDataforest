@@ -19,7 +19,7 @@ import { Link as GLink } from "gatsby";
 import { SideNav } from "../../components/Navigation/SideNav";
 import { SubmissionCard } from "../../components/Cards/Data/SubmissionCard";
 import { TopBar } from "../../components/Navigation/TopBar";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getTask, getTaskSubmissions } from "../../api/tasks";
 import { BigPublicTask } from "../../components/Cards/Task/BigPublicTask";
 import { dummy_submissions } from "../../dataSource/submissions";
@@ -33,17 +33,24 @@ import { ListIcon } from "../../icons/jsx/list";
 import { SelectAllIcon } from "../../icons/jsx/selectall";
 import { abbreviate } from "../../helpers/abbreviate";
 import { Task } from "../../types/task";
+import { MiniPreloader } from "../../components/Preloaders/MiniPreloader";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Submission } from "../../types/submission";
 const PublicSpecificTask = ({ task }:{task:Task}) => {
  
  
   const [submissionsLoading,setSubmissionsLoading] = useState(true)
-  const [submissions,setSubmission] = useState([])
+  const [submissions,setSubmissions] = useState([])
   const [selectedData, setSelectedData] = useState([]);
   const [selectable, setSelectable] = useState(false);
+  const page = useRef(1);
+ 
+  
   const fetchTaskSubmission = ()=>{
     setSubmissionsLoading(true)
-    getTaskSubmissions({taskId:task._id.$oid}).then(({data})=>{
-      console.log(data);
+    getTaskSubmissions({taskId:task._id.$oid,page:page.current}).then(({data})=>{  
+          
+      setSubmissions([...submissions,...data.data]);
     }).catch(()=>{
 
     }).finally(()=>{  
@@ -173,6 +180,7 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
 
                   <TabPanels>
                     <TabPanel p={0} bg="white" my={4}>
+                      {submissionsLoading?<MiniPreloader/>:null}
                       <Flex
                         d={selectable ? "flex" : "none"}
                         py={3}
@@ -209,8 +217,12 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
                         }}
                         value={selectedData}
                       >
-                        {submissions.map((data, index) => {
+                        {submissions.map((data:Submission, index) => {
+                          console.log(data,data.tasks,data.tasks?.[task._id.$oid]);
+                          
                           return (
+                            
+                  
                             <Flex px={4} borderBottomWidth="1px">
                               <Checkbox
                                 d={selectable ? "flex" : "none"}
@@ -221,7 +233,7 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
                                 flex={1}
                                 pr={0}
                                 pl={4}
-                                // boxShadow="none"
+                                state={data.tasks?.[task._id.$oid]}
                                 h="64px"
                                 borderRadius="none"
                                 cursor="pointer"
@@ -239,7 +251,7 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
                         spacing={3}
                         w="100%"
                       >
-                        {dummy_submissions.map((data) => {
+                        {submissions.map((data) => {
                           return (
                             <SubmissionCard
                               cursor="pointer"

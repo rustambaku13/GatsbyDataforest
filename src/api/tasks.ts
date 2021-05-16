@@ -9,10 +9,9 @@ export const getTask = async ({ taskId }: { taskId: string }) => {
 
   return data
 };
-export const getTaskSubmissions = async ({ taskId }: { taskId: string }) => {
+export const getTaskSubmissions = async ({ taskId,...props }: { taskId: string,props:any }) => {
   const data = await ms_main.get(`/${taskId}/submissions`);
-  data.data.price_per_datum = only2Decimals(data.data.price_per_datum);
-
+  // data.data.price_per_datum = only2Decimals(data.data.price_per_datum);
   return data
 };
 export const getTasks = async (params = {}) => {
