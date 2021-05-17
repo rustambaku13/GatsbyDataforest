@@ -36,6 +36,7 @@ import { Task } from "../../types/task";
 import { MiniPreloader } from "../../components/Preloaders/MiniPreloader";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Submission } from "../../types/submission";
+import { NavigationContext } from "../../context/NavbarContext";
 const PublicSpecificTask = ({ task }:{task:Task}) => {
  
  
@@ -49,7 +50,7 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
   const fetchTaskSubmission = ()=>{
     setSubmissionsLoading(true)
     getTaskSubmissions({taskId:task._id.$oid,page:page.current}).then(({data})=>{  
-          
+      page.current++
       setSubmissions([...submissions,...data.data]);
     }).catch(()=>{
 
@@ -60,7 +61,9 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
   useEffect(fetchTaskSubmission,[task])
   return (
     <>
-      <SideNav />
+      <NavigationContext.Provider value={{page:"tasks"}}>
+          <SideNav/>
+      </NavigationContext.Provider>
       <Flex>
         <Box ml="264px" w="100%" minH="100vh">
           <TopBar />
@@ -180,7 +183,7 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
 
                   <TabPanels>
                     <TabPanel p={0} bg="white" my={4}>
-                      {submissionsLoading?<MiniPreloader/>:null}
+                      
                       <Flex
                         d={selectable ? "flex" : "none"}
                         py={3}
@@ -211,6 +214,14 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
                           Select all
                         </Text>
                       </Flex>
+                   
+                      <InfiniteScroll 
+                      loader={null}
+                      dataLength={submissions.length}
+                      next={fetchTaskSubmission}
+                      hasMore={true}
+                        style={{overflow:"hidden"}}
+                      >
                       <CheckboxGroup
                         onChange={(e) => {
                           setSelectedData(e);
@@ -218,8 +229,6 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
                         value={selectedData}
                       >
                         {submissions.map((data:Submission, index) => {
-                          console.log(data,data.tasks,data.tasks?.[task._id.$oid]);
-                          
                           return (
                             
                   
@@ -243,8 +252,18 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
                           );
                         })}
                       </CheckboxGroup>
+                        </InfiniteScroll>
+                     
+                        {submissionsLoading?<MiniPreloader/>:null}
                     </TabPanel>
                     <TabPanel p={0} my={4}>
+                    <InfiniteScroll 
+                      loader={null}
+                      dataLength={submissions.length}
+                      next={fetchTaskSubmission}
+                      hasMore={true}
+                        style={{overflow:"hidden"}}
+                      >
                       <SimpleGrid
                         columns={3}
                         flexWrap="wrap"
@@ -256,10 +275,11 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
                             <SubmissionCard
                               cursor="pointer"
                               submission={data}
+                              state={data.tasks?.[task._id.$oid]}
                             />
                           );
                         })}
-                      </SimpleGrid>
+                      </SimpleGrid></InfiniteScroll>
                     </TabPanel>
                   </TabPanels>
                 </Tabs>
@@ -388,6 +408,161 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
   );
 };
 
+
+const DefaultPage = ()=>{
+  return(
+    <>
+    <NavigationContext.Provider value={{page:"tasks"}}>
+        <SideNav/>
+    </NavigationContext.Provider>
+    <Flex>
+      <Box ml="264px" w="100%" minH="100vh">
+        <TopBar />
+        <Box as="main" pt={10} px={18} w="100%">
+          <Flex w="100%">
+            <Box flex={1} mr={5}>
+              <Box mb={6} color="romanSilver.base">
+                <GLink to="/tasks">
+                  <Text
+                    as="span"
+                    color="babyBlueEyes.dark"
+                    textDecor="underline"
+                  >
+                    Tasks
+                  </Text>
+                </GLink>
+                &nbsp; &#183;&nbsp;
+                
+              </Box>
+              {<Spinner />}
+              <Heading
+                mb={4}
+                as="h3"
+                fontSize="600"
+                fontWeight="medium"
+                color="black"
+              >
+                My submissions
+              </Heading>
+              <Tabs variant="buttons">
+                <Flex borderBottomWidth="1px" pb={3} w="100%">
+                  <Button mr={4} variant="dropdown_button" size="xs">
+                    Sort by: &nbsp;
+                    <Text
+                      as="span"
+                      fontSize="inherit"
+                      fontWeight="500"
+                      color="charlestonGreen.dark"
+                    >
+                      Status
+                      <ChevronDownIcon
+                        ml="4px"
+                        fontSize="0.5rem"
+                        d="inline-flex"
+                      />
+                    </Text>
+                  </Button>
+                  <Button mr={4} variant="dropdown_button" size="xs">
+                    <DateIcon mr="8px" />
+                    <Text
+                      as="span"
+                      fontSize="inherit"
+                      fontWeight="500"
+                      color="charlestonGreen.dark"
+                    >
+                      Any date
+                      <ChevronDownIcon
+                        ml="4px"
+                        fontSize="0.5rem"
+                        d="inline-flex"
+                      />
+                    </Text>
+                  </Button>
+                  <Button
+                    _hover={{
+                      borderColor: "babyBlueEyes.dark",
+                      bg: "white",
+                    }}
+                    
+                    mr={4}
+                 
+                    variant="dropdown_button"
+                    size="xs"
+                  >
+                    <SelectAllIcon
+                      mr="8px"
+                    />
+                    <Text
+                      color="charlestonGreen.dark"
+                      as="span"
+                      fontSize="inherit"
+                      fontWeight="500"
+                    >
+                      Select
+                    </Text>
+                  </Button>
+                  <Button
+                  
+                    variant="dropdown_button"
+                    size="xs"
+                  >
+                    <DeleteIcon mr="8px" />
+                    <Text
+                      as="span"
+                      fontSize="inherit"
+                      fontWeight="500"
+                      color="charlestonGreen.dark"
+                    >
+                      Delete
+                    </Text>
+                  </Button>
+
+                  <TabList ml="auto">
+                    <Tab mr={2}>
+                      <ListIcon />
+                    </Tab>
+                    <Tab>
+                      <GridIcon />
+                    </Tab>
+                  </TabList>
+                </Flex>
+
+                <TabPanels>
+                  <TabPanel p={0} bg="white" my={4}>
+                    
+                    <Flex
+                      py={3}
+                      px={4}
+                      borderBottomWidth="1px"
+                    >
+                      <Checkbox
+                        variant="light"
+                      />
+                      <Text
+                        flex={1}
+                        fontSize="300"
+                        fontWeight="500"
+                        variant="secondary"
+                        textAlign="right"
+                      >
+                        Select all
+                      </Text>
+                    </Flex>
+                 
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </Box>
+                    <Box flex="0 0 240px"></Box>
+         </Flex>
+        </Box>
+      </Box>
+    </Flex>
+  </>
+  )
+}
+
+
 const SpecificTaskPage =  ({taskId})=>{
 
   const [task,setTask] = useState(null)
@@ -400,7 +575,7 @@ const SpecificTaskPage =  ({taskId})=>{
       .finally(() => {});
   }, []);
 
-  if(!task)return null
+  if(!task)return <DefaultPage/>
   return <PublicSpecificTask task={task}/>
 }
 export default SpecificTaskPage;

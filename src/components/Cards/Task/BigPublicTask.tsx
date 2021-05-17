@@ -110,7 +110,7 @@ export const BigPublicTask = chakra(
             <Text
               mt={1}
               color="black"
-            >{`${task.filled} / ${task.quantity}`}</Text>
+            >{`${task.filled} / ${task.quantity?task.quantity:"\u221E"}`}</Text>
           </Box>
           <Box>
             <Text variant="secondary" as="label">

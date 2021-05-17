@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Image, Text, Link, VStack } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import dataforest from "../../../images/WhiteLogoText.svg";
 import github from "../../../icons/Github.svg";
 import { TaskIcon } from "../../../icons/jsx/task";
@@ -10,7 +10,9 @@ import { ChevronDownIcon } from "../../../icons/jsx/chevrondown";
 import { BadgeIcon } from "../../../icons/jsx/badge";
 import { Link as GLink, navigate } from "gatsby";
 import { MiniLeaderBoard } from "../../Cards/Leaderboard/MiniLeaderboardCard";
+import { NavigationContext } from "../../../context/NavbarContext";
 export const SideNav = () => {
+  const navContext = useContext(NavigationContext)
   return (
     <Flex
       direction="column"
@@ -43,6 +45,7 @@ export const SideNav = () => {
         </Box>
         <Box py="4px" px={4} h="56px" w="100%">
           <Button
+          aria-selected={navContext.page=='tasks'}
             onClick={() => {
               navigate("/tasks");
             }}

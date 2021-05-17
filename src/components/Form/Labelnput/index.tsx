@@ -373,8 +373,8 @@ LabelInput.AddNewAnnotation = (props) => {
             variant="outline"
             placeholder="Annotation Cardinality"
           >
-            <option value="S">One per Image</option>
-            <option value="M">Many per Image</option>
+            <option value="S">{context.selectedLabel?`One per ${context.selectedLabel.name}`:"One per Image"}</option>
+            <option value="M">{context.selectedLabel?`Many per ${context.selectedLabel.name}`:"Many per Image"}</option>
           </Select>
           <Text fontSize="300" color="danger.base">
             {formState.errors.label?.cardinality?.message}

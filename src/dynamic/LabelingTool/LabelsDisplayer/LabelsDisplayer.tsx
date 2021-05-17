@@ -44,11 +44,13 @@ export const LabelsDisplayer = observer(() => {
       bg="white"
       minW="300px"
       w="300px"
-    >
+    ><Box overflow='auto' w='100%' >
       <Text mb={2} color="black" fontWeight="500" fontSize="500">
         Task Labels
       </Text>
       <LabelTree labels={LabelingStore.task?.labels || []} />
+      </Box>
+      <Box className='scrollbar' overflow='auto' w='100%' flex='1'>
       <Text mt={7} mb={2} color="black" fontWeight="500" fontSize="500">
         My Labels
       </Text>
@@ -56,6 +58,7 @@ export const LabelsDisplayer = observer(() => {
         element={DataLabelsItem}
         labels={LabelingStore.dataLabels[LabelingStore.selectedData] || []}
       />
+      </Box>
       <Flex  alignItems='center' h='80px' mt="auto">
         <Button isLoading={loading} onClick={()=>{handleOneSubmission()}} size='sm' variant='babyBlue'  >
           Upload Data

@@ -28,6 +28,7 @@ export const DataCard = chakra(
         px={4}
         py={2}
         bg="white"
+        overflow='hidden'
       >
         <AspectRatio
           borderRadius="base"
@@ -38,7 +39,7 @@ export const DataCard = chakra(
         >
           <Image src={file.preview} />
         </AspectRatio>
-        <Text textAlign="left" fontWeight="500" color="black" fontSize="400">
+        <Text  whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis' textAlign="left" fontWeight="500" color="black" fontSize="400">
           {file.name}
         </Text>
       </Flex>

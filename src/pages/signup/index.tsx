@@ -15,7 +15,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { Link as GLink } from "gatsby";
+import { Link as GLink, navigate } from "gatsby";
 import { flowResult } from "mobx";
 import { observer } from "mobx-react-lite";
 import * as React from "react";
@@ -32,7 +32,7 @@ const IndexPage = observer(() => {
     setLoading(true);
     flowResult(UserStore.signUp(credentials))
       .then(() => {
-        alert("SUCCESSS");
+        navigate("/tasks")
       })
       .catch((err) => {})
       .finally(() => {
@@ -106,9 +106,6 @@ const IndexPage = observer(() => {
                     type="text"
                   />
                 </FormControl>
-                <Text fontSize="300" color="danger.base">
-                  {formState.errors.lname?.message}
-                </Text>
               </HStack>
               <FormControl id="email">
                 <FormLabel variant="">Email address</FormLabel>

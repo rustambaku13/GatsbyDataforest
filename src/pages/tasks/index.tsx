@@ -30,6 +30,7 @@ import SpecificTaskPage from "../../dynamic/Task/SpecificTask";
 import { ChevronDownIcon } from "../../icons/jsx/chevrondown";
 import { FilterIcon } from "../../icons/jsx/filter";
 import { PlusIcon } from "../../icons/jsx/plus";
+import { NavigationContext } from "../../context/NavbarContext";
 
 const IndexPage = () => {
   const [tasks, setTasks] = useState([]);
@@ -51,7 +52,10 @@ const IndexPage = () => {
   }, []);
   return (
     <>
-      <SideNav />
+    <NavigationContext.Provider value={{page:"tasks"}}>
+          <SideNav/>
+      </NavigationContext.Provider>
+      
       <Flex>
         <Box ml="264px" w="100%" minH="100vh">
           <TopBar />

@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   Badge,
+  AspectRatio,
 } from "@chakra-ui/react";
 import React from "react";
 import { SUBMISSION_STATE } from "../../../helpers/constants";
@@ -24,9 +25,9 @@ export const SubmissionCard = chakra(
         h="72px"
         borderRadius="base"
       >
-        <Center mr={4} borderWidth="1px" flex="0 0 80px" borderRadius="base">
+        <AspectRatio ratio={1/2} mr={4} borderWidth="1px" flex="0 0 80px" borderRadius="base">
           <Image maxH="100%" maxW="100%" src={submission.submission} />
-        </Center>
+        </AspectRatio>
         <Flex flexDir="column" flex={1}>
           <Text fontWeight="500" fontSize="300">
             {submission.metadata?.name}

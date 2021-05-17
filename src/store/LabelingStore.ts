@@ -22,7 +22,7 @@ export class LabelingStore {
   task: Task = null; // Task that is to be submitted
   dataLabels: DataLabel[][] = []; // Labels of the Data
 
-  selectedData: number = 0; // Index of the selected Data. Index because we are switching project.layers acordingly
+  selectedData: number = null; // Index of the selected Data. Index because we are switching project.layers acordingly
   selectedTaskLabel: TaskLabel = null; // Task Label that is selected
   selectedDataLabel: DataLabel = null; // Data Label that is selected
 
@@ -91,10 +91,10 @@ export class LabelingStore {
     this.data.splice(index,1)
     this.dataLabels[index].forEach(item=>item.delete())
     this.dataLabels.splice(index,1)
-    this.selectData=this.data.length?0:null
     this.selectTaskLabel = null
     this.selectDataLabel = null
     paper.project.activeLayer.remove()
+    this.selectData=this.data.length?0:null
     paper.project.layers?.[this.selectedData]?.activate()
   }
   resetAll(){
@@ -146,6 +146,11 @@ const toolPicker = (): ANNOTATION_TOOLS => {
   }
 };
 autorun(() => {
+  if(store.selectedData==null){
+    store.activeTool='norm'
+    store.state='SELECT_DATA'
+    return
+  }
   if (store.selectedTaskLabel && !store.selectedDataLabel) {
     if (store.selectedTaskLabel.parent) {store.activeTool = "norm";store.state='SELECT_DATA_LABEL'}
     else {store.activeTool = toolPicker();store.state="LABELING"}

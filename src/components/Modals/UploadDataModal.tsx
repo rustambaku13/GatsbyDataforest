@@ -32,6 +32,14 @@ const ButtonSubmit = () => {
     </Button>
   );
 };
+const HelperText = ()=>{
+  const context = useContext(DataUploadContext)
+                  return(
+                    <Text mb={5} fontSize="300" variant="secondary">
+                    {context.files.length?`${context.files.length} images are ready to be labeled`:"Please upload some files"}
+                  </Text>
+                  )
+}
 export const UploadDataModal = observer(() => {
   return (
     <Modal
@@ -59,9 +67,7 @@ export const UploadDataModal = observer(() => {
             <DropZone />
             <Box borderRadius="base" borderWidth="1px" px={4} py={6}>
               <Text fontWeight="500">Submitted data</Text>
-              <Text mb={5} fontSize="300" variant="secondary">
-                3 images are ready to be labeled
-              </Text>
+              <HelperText/>
               <ListImageFileCards overflow="visible" maxH="400px" />
             </Box>
 

@@ -4,7 +4,12 @@ export function* range(start, end) {
   }
 }
 const re = /(\d*.\d{2})/;
-export function only2Decimals(str: string) {
-  const a = str.match(re);
-  return a?.[0] || str;
+export function only2Decimals(object: any,name:string='price_per_datum') {
+  try{
+      const a = object[name].match(re);
+      object[name] = a?.[0] || object[name];
+
+  }catch{
+    // Do nothing
+  }
 }

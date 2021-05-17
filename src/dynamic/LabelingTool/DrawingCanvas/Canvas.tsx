@@ -42,6 +42,18 @@ switch(LabelingStore.state){
         Click on a data label to start
       </Text>
     </Center>
+  case "SELECT_DATA":
+    return <Center zIndex={3}
+    pos="absolute"
+    top="0"
+    left="0"
+    right="0"
+    bottom="0"  w="100%"
+    h="100%" bg='rgba(0,0,0,0.7)'>
+      <Text fontSize='700' color='white'>
+        Click on data to start anntating
+      </Text>
+    </Center>
   default:
     return null
 }
@@ -63,7 +75,7 @@ export const Canvas = observer(() => {
       <NumberInputToolModal />
       <TextInputToolModal/>
       <BooleanInputToolModal/>
-      <Box w="calc(100% - 600px )" pos="relative" zIndex={0} h="100%">
+      <Box bg='romanSilver.base' w="calc(100% - 600px )" pos="relative" zIndex={0} h="100%">
         <Box  pos="absolute" w='100%'   zIndex={2}  >
           <Box color='romanSilver.base' textAlign='center' h='32px' lineHeight='32px' m='0 auto' borderBottomRightRadius='base' borderBottomLeftRadius='base' w='200px' bg='white'>
             {LABELING_TOOL_NAMES[LabelingStore.activeTool]}
@@ -73,14 +85,13 @@ export const Canvas = observer(() => {
         <Box
           zIndex={1}
           pos="absolute"
-          top="0"
-          left="0"
-          right="0"
-          bottom="0"
+          top="5%"
+          left="5%"
+
           ref={canvas}
-          w="100%"
-          h="100%"
-          bg="#C4C4C4"
+          w='90%'
+          h='90%'
+          
           as="canvas"
         ></Box>
       </Box>
