@@ -8,3 +8,6 @@ export const UploadIcon = (props) => (
     />
   </Icon>
 );
+export const DownloadIcon = (props) => (
+  <UploadIcon transform="rotate(180deg)" />
+);

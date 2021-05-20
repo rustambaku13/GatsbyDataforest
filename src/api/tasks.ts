@@ -31,4 +31,13 @@ export const addSubmission = async (taskId,formData) => {
   return await ms_main.post(`/${taskId}/add-data`, formData);
 };
 
+export const downloadTaskDataset = async (taskId)=>{
+  const data = await ms_main.get(`/export/${taskId}`,{responseType:"blob"})
 
+  const url = window.URL.createObjectURL(new Blob([data.data]));
+   const link = document.createElement('a');
+   link.href = url;
+   link.setAttribute('download', 'file.zip'); //or any other extension
+   document.body.appendChild(link);
+   link.click();
+}

@@ -9,6 +9,7 @@ export interface Task {
   labels: TaskLabel[];
   description: string;
   tags: string[];
+  owner:string;
   quantity: number;
   filled: number;
   rejected: number;

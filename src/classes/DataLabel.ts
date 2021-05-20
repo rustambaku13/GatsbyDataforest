@@ -55,12 +55,21 @@ export class DataLabel {
   getBounds(){
     const rect = this.element.children[1]
     const topLeft = rect.bounds.topLeft.subtract(this.raster.bounds.topLeft)
+    const relativeTopLeft = topLeft.clone()
+    relativeTopLeft.x = relativeTopLeft.x/this.raster.bounds.width
+    relativeTopLeft.y = relativeTopLeft.y/this.raster.bounds.height
     const width = rect.bounds.width
     const height = rect.bounds.height
+
     return {
       topLeft:{x:topLeft.x,y:topLeft.y},
       width,
-      height
+      height,
+      relativeUnits:{
+        width: width / this.raster.bounds.width,
+        height: height / this.raster.bounds.height,
+        topLeft:{x:relativeTopLeft.x,y:relativeTopLeft.y},
+      }
     }
   }
   toJSON(){
