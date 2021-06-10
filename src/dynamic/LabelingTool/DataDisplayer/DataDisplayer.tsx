@@ -10,7 +10,7 @@ import {
 import { navigate } from "gatsby-link";
 import { observer } from "mobx-react-lite";
 
-import React from "react";
+import React, { useState } from "react";
 import { CrossIcon } from "../../../icons/jsx/cross";
 import { HamburgerMenu } from "../../../icons/jsx/hamburger";
 import LabelingStore from "../../../store/LabelingStore";
@@ -22,10 +22,10 @@ import { DataCard } from "./DataCard";
  * @returns React.Element
  */
 export const DataDisplayer = observer(() => {
+  const [expanded,setExpanded] = useState(true)
   const closeLabelingStore = async ()=>{
     navigate(`/tasks/${LabelingStore.task.id}`)
     LabelingStore.resetAll()
-    
   }
   return (
     <Box
@@ -33,11 +33,27 @@ export const DataDisplayer = observer(() => {
       py={6}
       zIndex={1}
       bg="white"
-      minW="300px"
-      w="300px"
+      overflow='hidden'
+      aria-expanded={expanded}
+      _expanded={{
+        maxW:"300px",
+          ".hide-on-expand":{
+            d:"unset"
+          }        
+      }}
+      w="100%"
+      transition=".3s ease"
+      sx={{
+        ".hide-on-expand":{
+          d:"none"
+        }
+      }}
+      maxW='50px'
+
     >
       <Flex mb={6} px={4}>
         <IconButton
+          className='hide-on-expand'
           border="none"
           color="white"
           fontSize="200"
@@ -52,16 +68,16 @@ export const DataDisplayer = observer(() => {
               yes:"Yes",
               no:"No",
               callback:closeLabelingStore,
-              description:"All Unsumitted data will be lost",
+              description:"All unsubmitted data will be lost",
               title:"Are you sure to exit data upload",
               type:"error"
-
             })
           }}
 
-          icon={<CrossIcon />}
+          icon={<CrossIcon mx='auto'/>}
         />
         <Text
+          className='hide-on-expand'
           color="black"
           fontWeight="500"
           fontSize="500"
@@ -75,13 +91,14 @@ export const DataDisplayer = observer(() => {
           color="romanSilver.base"
           aria-label="Collapse"
           w="6"
+          onClick={()=>{setExpanded(!expanded)}}
           fontSize="700"
           h="6"
           minW="unset"
           icon={<HamburgerMenu />}
         />
       </Flex>
-      <VStack w="100%" spacing={2}>
+      <VStack className='hide-on-expand' w="100%" spacing={2}>
         {LabelingStore.data.map((file, index) => (
           <>
             <DataCard index={index} file={file} />

@@ -18,6 +18,9 @@ export const SubmissionCard = chakra(
   ({ className, submission,state }: { className?: any; submission: Submission,state:number }) => {
     return (
       <Flex
+        _hover={{
+          boxShadow:"elevation_3"
+        }}
         boxShadow="elevation_6"
         className={className}
         p={2}

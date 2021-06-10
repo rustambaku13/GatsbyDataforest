@@ -25,6 +25,9 @@ export const DataCard = chakra(
         }}
         w="100%"
         className={className}
+        _hover={{
+          bg:"blueberryBlue.light"
+        }}
         px={4}
         py={2}
         bg="white"

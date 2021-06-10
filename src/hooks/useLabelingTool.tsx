@@ -32,7 +32,8 @@ const getToolFromLabel = () => {
 const initialInstall = (canvas) => {
   paper.install(window);
   paper.settings.insertItems = false;
-  new paper.Project(canvas.current);
+  
+  const project = new paper.Project(canvas.current);
   LabelingStore.data.forEach((file: File) => {
     const a = new paper.Layer();
     paper.project.addLayer(a);
@@ -40,6 +41,34 @@ const initialInstall = (canvas) => {
     const raster = makeRaster(file);
     a.addChild(raster);
   });
+
+  // Create Resize observer
+  const ro = new ResizeObserver(entries =>{
+    
+    try{
+      
+      const {contentRect:{height,width}} = entries[0]
+      project.view.viewSize = new paper.Size({height,width})
+      project.layers.forEach((layer)=>{
+        if(layer.firstChild.loaded){ // If Raster is loaded scale the layer as well
+          layer.fitBounds(project.view.bounds,false)
+        }
+      })
+      
+    }catch{
+
+    }
+    
+
+
+
+  })
+  ro.observe(canvas.current)
+  // Create Window Observer
+  // window.onresize = (data)=>{
+  //   console.log(data);
+    
+  // }
 };
 /**
  * Change the Active Layer according to selectedData and make it visible

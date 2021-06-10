@@ -25,9 +25,6 @@ export const LabelTreeItem = chakra(
     return (
       <Box
         aria-expanded={expanded}
-        onClick={() => {
-          LayoutStore.labelDescriptionModalOpen(label);
-        }}
         h="36px"
         as="li"
       >
@@ -35,9 +32,13 @@ export const LabelTreeItem = chakra(
           className={className}
           aria-haspopup="menu"
           w="100%"
+          onClick={() => {
+            LayoutStore.labelDescriptionModalOpen(label);
+          }}
           variant="unstyled"
           justifyContent="start"
           aria-expanded={expanded}
+          _hover={{ bg: "gold.light" }}
           display="flex"
           alignItems="center"
           h="36px"

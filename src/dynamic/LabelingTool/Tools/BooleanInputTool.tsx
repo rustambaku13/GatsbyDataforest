@@ -63,11 +63,11 @@ export const BooleanInputToolModal = () => {
             </Text>
             <Box mx="auto" maxW="200px" w="100%">
               <Flex justifyContent='center' mx='auto'>
-              <Checkbox isChecked={yes} onChange={e=>{setYes(e.target.checked)}} mr={3} 
+              <Checkbox isDisabled={yes} isChecked={yes} onChange={e=>{setYes(e.target.checked)}} mr={3} 
                 size="lg" >
                 Yes
               </Checkbox>
-              <Checkbox isChecked={!yes} onChange={e=>{setYes(!e.target.checked)}}
+              <Checkbox isDisabled={!yes} isChecked={!yes} onChange={e=>{setYes(!e.target.checked)}}
                 size="lg" >
                 No
               </Checkbox>

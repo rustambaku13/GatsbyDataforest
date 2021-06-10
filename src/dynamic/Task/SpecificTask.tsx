@@ -6,6 +6,10 @@ import {
   Flex,
   Heading,
   Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   SimpleGrid,
   Spinner,
   Tab,
@@ -96,9 +100,16 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
                 </Heading>
                 <Tabs variant="buttons">
                   <Flex borderBottomWidth="1px" pb={3} w="100%">
-                    <Button mr={4} variant="dropdown_button" size="xs">
-                      Sort by: &nbsp;
+                  <Menu>
+                    <MenuButton
+                      variant="dropdown_button"
+                      mr={4}
+                      size="xs"
+                      as={Button}
+                    >
+                      Sort by:
                       <Text
+                        ml="4px"
                         as="span"
                         fontSize="inherit"
                         fontWeight="500"
@@ -107,12 +118,25 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
                         Status
                         <ChevronDownIcon
                           ml="4px"
+                          _active={{ color: "red" }}
                           fontSize="0.5rem"
                           d="inline-flex"
                         />
-                      </Text>
-                    </Button>
-                    <Button mr={4} variant="dropdown_button" size="xs">
+                      </Text>{" "}
+                    </MenuButton>
+                    <MenuList>
+                      <MenuItem cursor="pointer" as={Box}>
+                        <Box bg='success.base' mr={2} h="2" w='2' borderRadius='50%'/>Accepted
+                      </MenuItem>
+                      <MenuItem cursor="pointer" as={Box}>
+                      <Box bg='warning.base' mr={2} h="2" w='2' borderRadius='50%'/>In progress
+                      </MenuItem>
+                      <MenuItem cursor="pointer" as={Box}>
+                      <Box bg='danger.base' mr={2} h="2" w='2' borderRadius='50%'/>Rejected
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
+                    <Button disabled={true} mr={4} variant="dropdown_button" size="xs">
                       <DateIcon mr="8px" />
                       <Text
                         as="span"
@@ -210,7 +234,7 @@ const PublicSpecificTask = ({ task }:{task:Task}) => {
                           fontSize="300"
                           fontWeight="500"
                           variant="secondary"
-                          textAlign="right"
+                          pl={3}
                         >
                           Select all
                         </Text>
@@ -581,7 +605,8 @@ const MySpecificTask = ({ task }:{task:Task}) => {
                           fontSize="300"
                           fontWeight="500"
                           variant="secondary"
-                          textAlign="right"
+                         
+                          pl={3}
                         >
                           Select all
                         </Text>

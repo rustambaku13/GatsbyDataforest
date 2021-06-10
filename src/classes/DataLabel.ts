@@ -53,7 +53,8 @@ export class DataLabel {
     this.store.selectDataLabel = null;
   }
   getBounds(){
-    const rect = this.element.children[1]
+    // Function that returns the bounds relative to the Raster that is being worked on
+    const rect = this.element.children[1] // Get the main rectange and ignore the label name component
     const topLeft = rect.bounds.topLeft.subtract(this.raster.bounds.topLeft)
     const relativeTopLeft = topLeft.clone()
     relativeTopLeft.x = relativeTopLeft.x/this.raster.bounds.width
@@ -61,6 +62,7 @@ export class DataLabel {
     const width = rect.bounds.width
     const height = rect.bounds.height
 
+    // Return the absolute pixel coordinates as well as the relative to the Raster being worked on. Easy!
     return {
       topLeft:{x:topLeft.x,y:topLeft.y},
       width,
@@ -73,12 +75,13 @@ export class DataLabel {
     }
   }
   toJSON(){
+    // JSONify data for backend serialization 
     const children = this.children.map(item=>item.toJSON()) // Recursive Match
     let data = {
-      name:this.name,
+      name:this.name, // Name that includes the numbering 
       description:this.description,
       is_annotation:this.is_annotation,
-      taskLabelName:this.taskLabelName,
+      taskLabelName:this.taskLabelName, // Task label name that matches with this label
       label_type:this.label_type,
       children,
       value:null

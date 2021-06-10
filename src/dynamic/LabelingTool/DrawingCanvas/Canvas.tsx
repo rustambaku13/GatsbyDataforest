@@ -19,39 +19,59 @@ const CanvasHints = observer(()=>{
 
 switch(LabelingStore.state){
   case "SELECT_LABEL":
-    return <Center zIndex={3}
+    return <Center
+    pointerEvents='none'
+    zIndex={2}
     pos="absolute"
     top="0"
     left="0"
     right="0"
     bottom="0"  w="100%"
-    h="100%" bg='rgba(0,0,0,0.7)'>
-      <Text fontSize='700' color='white'>
+    h="100%" bg='rgba(0,0,0,0.3)'>
+      <Text textAlign='center' fontSize='700' color='white'>
         Click on a task label to start
       </Text>
     </Center>
   case "SELECT_DATA_LABEL":
-    return <Center zIndex={3}
+    return <Center
+    pointerEvents='none'
+    zIndex={2}
     pos="absolute"
     top="0"
     left="0"
     right="0"
     bottom="0"  w="100%"
-    h="100%" bg='rgba(0,0,0,0.7)'>
-      <Text fontSize='700' color='white'>
+    h="100%" bg='rgba(0,0,0,0.3)'>
+      <Text textAlign='center' fontSize='700' color='white'>
         Click on a data label to start
       </Text>
     </Center>
   case "SELECT_DATA":
-    return <Center zIndex={3}
+    return <Center
+    pointerEvents='none'
+    zIndex={2}
     pos="absolute"
     top="0"
     left="0"
     right="0"
     bottom="0"  w="100%"
-    h="100%" bg='rgba(0,0,0,0.7)'>
-      <Text fontSize='700' color='white'>
+    h="100%" bg='rgba(0,0,0,0.3)'>
+      <Text textAlign='center' fontSize='700' color='white'>
         Click on data to start anntating
+      </Text>
+    </Center>
+  case "SELECT_LABEL_OR_REMOVE_DATA_LABEL":
+    return <Center
+    pointerEvents='none'
+    zIndex={2}
+    pos="absolute"
+    top="0"
+    left="0"
+    right="0"
+    bottom="0"  w="100%"
+    h="100%" bg='rgba(0,0,0,0.3)'>
+      <Text textAlign='center' fontSize='700' color='white'>
+        Click on a task label to start <br/>or<br/>press <code>delete</code> key to remove the label
       </Text>
     </Center>
   default:
@@ -67,7 +87,15 @@ switch(LabelingStore.state){
  */
 export const Canvas = observer(() => {
   const canvas = useRef(null);
+  useEffect(() => {
+    const scaleCanvas = ()=>{
 
+    }
+    window.addEventListener("resize",scaleCanvas)
+    return () => {
+      
+    }
+  }, [])
   useLabelingTool(canvas);
 
   return (
@@ -75,25 +103,19 @@ export const Canvas = observer(() => {
       <NumberInputToolModal />
       <TextInputToolModal/>
       <BooleanInputToolModal/>
-      <Box bg='romanSilver.base' w="calc(100% - 600px )" pos="relative" zIndex={0} h="100%">
+      <Box bg='romanSilver.base'  w='100%' pos="relative" zIndex={0} h="100%">
         <Box  pos="absolute" w='100%'   zIndex={2}  >
           <Box color='romanSilver.base' textAlign='center' h='32px' lineHeight='32px' m='0 auto' borderBottomRightRadius='base' borderBottomLeftRadius='base' w='200px' bg='white'>
             {LABELING_TOOL_NAMES[LabelingStore.activeTool]}
           </Box>
         </Box>
         <CanvasHints/>
-        <Box
-          zIndex={1}
-          pos="absolute"
-          top="5%"
-          left="5%"
-
-          ref={canvas}
-          w='90%'
-          h='90%'
-          
-          as="canvas"
-        ></Box>
+        
+        <Box zIndex={1} width='90%' height='90%' pos="absolute" top="5%" left="5%"  ref={canvas} as="canvas">
+        
+       </Box>
+        
+        
       </Box>
     </>
   );

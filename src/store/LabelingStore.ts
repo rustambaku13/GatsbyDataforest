@@ -15,7 +15,7 @@ import { normalinteractionTool } from "../dynamic/LabelingTool/Tools/normalInter
 import { rectangeAnnotationTool } from "../dynamic/LabelingTool/Tools/rectangleAnnotationTool";
 
 const isBrowser = typeof window !== "undefined";
-type TOOL_STATE = "SELECT_DATA" | "SELECT_LABEL" | "SELECT_DATA_LABEL" | "LABELING" | "ADDING";
+type TOOL_STATE = "SELECT_DATA" | "SELECT_LABEL" | "SELECT_DATA_LABEL" | "LABELING" | "ADDING" | "SELECT_LABEL_OR_REMOVE_DATA_LABEL";
 type ANNOTATION_TOOLS = "rect" | "norm" | "number" | "text" | "boolean";
 export class LabelingStore {
   data: File[] = []; // data that we are working on
@@ -27,7 +27,7 @@ export class LabelingStore {
   selectedDataLabel: DataLabel = null; // Data Label that is selected
 
   activeTool: ANNOTATION_TOOLS = "norm"; // Active Tool that is cuurently active
-  state: TOOL_STATE = "SELECT_DATA";
+  state: TOOL_STATE = "SELECT_DATA"; // States for the debug message
   constructor() {
     makeAutoObservable(this, {
       selectedTaskLabel: observable.shallow,
@@ -40,10 +40,10 @@ export class LabelingStore {
 
   addDataLabel(label: any) {
     const dataLabel = new DataLabel(this.selectedTaskLabel);
-    dataLabel.parent = this.selectedDataLabel;
-    dataLabel.raster = paper.project.activeLayer.firstChild;
-    dataLabel.store = this;
-    dataLabel.element = label;
+    dataLabel.parent = this.selectedDataLabel; // Can be null if it the root of the labels
+    dataLabel.raster = paper.project.activeLayer.firstChild; // the image that I am working on 
+    dataLabel.store = this; // This store object reference
+    dataLabel.element = label; // Element if exists 
     if (label instanceof paper.Item) label.data.element = dataLabel;
     if (this.selectedDataLabel) this.selectedDataLabel.children.push(dataLabel);
     else {
@@ -54,7 +54,8 @@ export class LabelingStore {
       ...this.dataLabels[this.selectedData],
     ];
     // Remove Selected Data Label
-    this.selectDataLabel = null
+    // Design Choise: Should we reset the selected data label after adding label
+    // this.selectDataLabel = null 
   }
 
   uploadData(data) {
@@ -167,7 +168,7 @@ autorun(() => {
     }
   } else if (!store.selectedTaskLabel && store.selectedDataLabel) {
     store.activeTool = "norm";
-    store.state="SELECT_LABEL"
+    store.state="SELECT_LABEL_OR_REMOVE_DATA_LABEL"
   } else {
     store.activeTool = "norm";
     store.state="SELECT_LABEL"

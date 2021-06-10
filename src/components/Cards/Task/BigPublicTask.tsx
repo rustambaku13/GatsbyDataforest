@@ -158,6 +158,7 @@ export const BigPublicTask = chakra(
           color="babyBlueEyes.dark"
           borderColor="babyBlueEyes.dark"
           size="sm"
+          disabled={true}
         >
           <TrackIcon mr={1} />
           Track

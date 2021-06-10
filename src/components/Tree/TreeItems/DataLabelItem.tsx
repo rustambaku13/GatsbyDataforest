@@ -22,7 +22,7 @@ export const DataLabelsItem = observer(
   }) => {
     const [expanded, setExpanded] = useState(true);
     return (
-      <Box aria-expanded={expanded} h="36px" as="li">
+      <Box aria-expanded={expanded} as="li">
         <Button
           onClick={(e) => {
             LabelingStore.selectedDataLabel == label
@@ -70,6 +70,12 @@ export const DataLabelsItem = observer(
             ></IconButton>
           ) : null}
         </Button>
+        {label.is_annotation?null:<Box _selected={{
+            bg: "gold.light",
+          }}
+          aria-selected={LabelingStore.selectedDataLabel == label} w="100%" pos="relative" display="none" role="menu" as="ul">
+              &#8226; {label.element}
+        </Box>}
         <Box w="100%" pos="relative" display="none" role="menu" as="ul">
           {children}
         </Box>
