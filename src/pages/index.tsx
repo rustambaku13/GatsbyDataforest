@@ -90,11 +90,10 @@ your needs.
                 - &nbsp; DATASET PAGE
               </Text>
               <Heading color='white' mb={4} fontWeight='600' fontSize='hb2'>
-              Sell your datasets & earn money
+              Sell your datasets <br/>& earn money
               </Heading>
               <Text fontFamily='IBM' fontWeight='light' fontSize='500' color='outline.dark'>
-              Dataforest offers a unique pipeline from ordering custom datasets to selling your datasets all in one place.  Explore your possibilities as a data
-broker now. 
+              Dataforest offers a unique pipeline from ordering custom datasets to selling your datasets all in one place. Earn money as a data broker now. 
               </Text>
               <Image mt={8} ml='auto' pos='relative' left="50px" src={arrowrightpurple}/>
               <Image zIndex={0}  pos='absolute' maxW='486px' transform="translate(-25%,-40%)" src={cloudpink} alt="Ready AI models "/>
@@ -126,17 +125,18 @@ broker now.
           Our Services
         </Heading>
         <Heading mb={16} fontFamily="IBM" letterSpacing='2px' maxW='592px' mx='auto' as='h2' fontSize='500' textAlign='center' color='outline.dark' fontWeight='light'>
-        Dataforest provides a plethora of unique <br/> features for users to benefit from. 
+        Dataforest provides a plethora of unique
+features for users from different business needs to benefit from. 
         </Heading>
         <Swiper freeMode={true} effect='coverflow'  slidesPerView={4} spaceBetween={1} >
           <SwiperSlide style={{overflow:"visible"}}>
           <Box  cursor='pointer' _hover={{boxShadow:"0 0px 50px 0px rgba(255,255,255,0.1)",borderRadius:"2xl"}}  transition='.2s ease-in-out' color='white' w='280px' h='224px' bg='blueberryBlue.base' p={5} borderRadius='lg'>
             <Image  src={powerbank} ml='auto' h='80px'/>
             <Text mb={1} mt={5} fontWeight='500'>
-              Our Services
+              Object Detection
             </Text>
             <Text fontSize='400' letterSpacing='2px' fontFamily='IBM'>
-            Dataforest provides a plethora of unique. 
+            Gather custom object datasets with hand-crafted labels
             </Text>
           </Box>
           </SwiperSlide>
@@ -144,10 +144,10 @@ broker now.
             <Box  cursor='pointer' _hover={{boxShadow:"0 0px 50px 0px rgba(255,255,255,0.1)",borderRadius:"2xl"}}  transition='.2s ease-in-out' color='white' w='280px' h='224px' bg='fashionFuchsia.dark' p={5} borderRadius='lg'>
               <Image  src={cube} ml='auto' h='80px'/>
               <Text mb={1} mt={5} fontWeight='500'>
-              Recommendation systems
+              Face Detection
               </Text>
               <Text fontSize='400' letterSpacing='2px' fontFamily='IBM'>
-              Dataforest provides a plethora of unique. 
+              Gather images of our users with custom labels
               </Text>
             </Box>
           </SwiperSlide>
@@ -158,7 +158,7 @@ broker now.
                 Crowd Counting
               </Text>
               <Text fontSize='400' letterSpacing='2px' fontFamily='IBM'>
-              Dataforest provides a plethora of unique. 
+                Gather custom crowd images with dot annotations
               </Text>
             </Box>
           </SwiperSlide>
@@ -169,7 +169,7 @@ broker now.
               Autonomous Vehicles
               </Text>
               <Text fontSize='400' letterSpacing='2px' fontFamily='IBM'>
-              Dataforest provides a plethora of unique. 
+              Gather in-car recorder datasets with custom labels
               </Text>
             </Box>
           </SwiperSlide>
